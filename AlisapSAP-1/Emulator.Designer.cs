@@ -112,11 +112,12 @@
             // 
             // lblAccu
             // 
+            this.lblAccu.AutoSize = true;
             this.lblAccu.BackColor = System.Drawing.Color.YellowGreen;
             this.lblAccu.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAccu.Location = new System.Drawing.Point(491, 113);
+            this.lblAccu.Location = new System.Drawing.Point(507, 113);
             this.lblAccu.Name = "lblAccu";
-            this.lblAccu.Size = new System.Drawing.Size(121, 21);
+            this.lblAccu.Size = new System.Drawing.Size(0, 22);
             this.lblAccu.TabIndex = 4;
             this.lblAccu.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -169,7 +170,7 @@
             this.lblMoving.AutoSize = true;
             this.lblMoving.BackColor = System.Drawing.Color.YellowGreen;
             this.lblMoving.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMoving.Location = new System.Drawing.Point(86, 113);
+            this.lblMoving.Location = new System.Drawing.Point(121, 113);
             this.lblMoving.Name = "lblMoving";
             this.lblMoving.Size = new System.Drawing.Size(0, 22);
             this.lblMoving.TabIndex = 2;
@@ -180,7 +181,7 @@
             this.lblPC.AutoSize = true;
             this.lblPC.BackColor = System.Drawing.Color.YellowGreen;
             this.lblPC.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPC.Location = new System.Drawing.Point(121, 112);
+            this.lblPC.Location = new System.Drawing.Point(121, 113);
             this.lblPC.Name = "lblPC";
             this.lblPC.Size = new System.Drawing.Size(0, 22);
             this.lblPC.TabIndex = 4;
