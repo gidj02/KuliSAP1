@@ -292,7 +292,7 @@ namespace AlisapSAP_1
 
         private void openSAP1EmulatorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Emulator em = new Emulator();
+            Emulator em = new Emulator(machineCode);
             em.ShowDialog();
         }
 
@@ -485,7 +485,6 @@ namespace AlisapSAP_1
             Errors.AddRange(assemblerError);
             listBox1.DataSource = Errors;
         }
-  
     
     }
 }

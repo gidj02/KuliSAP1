@@ -168,6 +168,7 @@
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
+            
             // 
             // sAP1ArchitectureToolStripMenuItem
             // 
