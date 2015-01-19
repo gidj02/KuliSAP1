@@ -17,6 +17,7 @@ namespace AlisapSAP_1
         string currentFileDirectory=" ";
         string currentFileName=" ";
         bool cancelled = false;
+
         HashSet<string> reserved = new HashSet<string>();
         HashSet<string> reserved1 = new HashSet<string>();
         HashSet<string> reserved2 = new HashSet<string>();
@@ -203,7 +204,7 @@ namespace AlisapSAP_1
                     }
                     else if (result == DialogResult.No)
                     {
-
+                        richTextBox1.Text = "";
                     }
                     else {
                         cancelled = true;
