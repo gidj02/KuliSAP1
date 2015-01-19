@@ -11,7 +11,11 @@ namespace AlisapSAP_1
 {
     public partial class Emulator : Form
     {
-        private int iIncrement = 0, currentTop = 0, currentLeft = 0;
+        private int iIncrement = 0,
+                    currentTop = 0, 
+                    currentLeft = 0,
+                    currentState = 0,
+                    temp = 0;
         private string[,] machineCode;
         private string direction = "";
 
@@ -43,6 +47,7 @@ namespace AlisapSAP_1
         {
             lblMoving.Text = machineCode[iIncrement, 0];
 
+            currentState = 1;
             direction = "LEFT";
             currentTop = lblMoving.Top;
             currentLeft = lblMoving.Left;
@@ -52,9 +57,36 @@ namespace AlisapSAP_1
 
         private void State2()
         {
+            currentState = 2;
+            lblPC.Text = machineCode[iIncrement, 0];
+            State3();
+        }
+
+        private void State3()
+        {
+            currentState = 3;
+            lblMoving.Top = currentTop = lblRam.Top;
+            lblMoving.Left = currentLeft = lblRam.Left;
+
+            lblMoving.Text = lblRam.Text;
+            lblRam.Text = "";
+            direction = "LEFT";
+     
             timer1.Start();
         }
 
+        private void State4()
+        {
+            currentState = 4;
+
+            lblMoving.Top = lblIR.Top;
+            lblMoving.Text = lblIR.Text.Substring(4, 4);
+
+            direction = "LEFT";
+            currentTop = lblMoving.Top;
+
+            timer1.Start();
+        }
         private void timer1_Tick(object sender, EventArgs e)
         {
             switch (direction)
@@ -63,7 +95,11 @@ namespace AlisapSAP_1
                     {
                         if (lblMoving.Left < 320 && lblMoving.Left < 350)
                             lblMoving.Left += 10;
-                        else direction = "DOWN";
+                        else
+                        {
+                            if (currentState == 4) direction = "UP";
+                            else direction = "DOWN";
+                        } 
                         break;
                     }
                 case "DOWN":
@@ -73,11 +109,60 @@ namespace AlisapSAP_1
                         else direction = "RIGHT";
                         break;
                     }
+                case "UP":
+                    {
+                        {
+                            if (lblMoving.Top > lblIM.Top && lblMoving.Top > lblIM.Top - 20)
+                                lblMoving.Top -= 10;
+                            else direction = "RIGHT";
+                            break;
+                        }
+                    }
                 case "RIGHT":
                     {
-                        if (lblMoving.Left > currentLeft + 30 && lblMoving.Left > currentLeft)
+                        if (lblMoving.Left > currentLeft + 40 && lblMoving.Left > currentLeft)
                             lblMoving.Left -= 10;
-                        else timer1.Stop();
+                        else
+                        {
+                            
+                            if (currentState == 1)
+                            {
+                                timer1.Stop();
+                                lblIM.Text = lblMoving.Text;
+                                lblMoving.Text = "";
+                                lblRam.Text = machineCode[iIncrement, 1];
+                                iIncrement++;
+
+                                State2();
+                            }
+                            else if (currentState == 3)
+                            {
+                                if (temp == 0)
+                                {
+                                    lblIR.Text = lblMoving.Text;
+                                    lblMoving.Text = lblMoving.Text.Substring(0, 4);
+
+                                    direction = "DOWN";
+                                    currentTop = lblIR.Top;
+
+                                    temp = 1;
+                                }
+                                else if (temp == 1)
+                                {
+                                    lblCS.Text = lblMoving.Text;
+                                    lblMoving.Text = "";
+                                    temp = 0;
+                                    State4();
+                                }
+                            }
+                            else if (currentState == 4)
+                            {
+                                lblIM.Text = lblMoving.Text;
+                                lblMoving.Text = "";
+
+                                timer1.Stop();
+                            }
+                        }
                         break;
                     }
                 

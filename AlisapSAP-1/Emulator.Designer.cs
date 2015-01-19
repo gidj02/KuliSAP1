@@ -122,11 +122,12 @@
             // 
             // lblCS
             // 
+            this.lblCS.AutoSize = true;
             this.lblCS.BackColor = System.Drawing.Color.YellowGreen;
             this.lblCS.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCS.Location = new System.Drawing.Point(86, 497);
+            this.lblCS.Location = new System.Drawing.Point(121, 497);
             this.lblCS.Name = "lblCS";
-            this.lblCS.Size = new System.Drawing.Size(121, 21);
+            this.lblCS.Size = new System.Drawing.Size(0, 22);
             this.lblCS.TabIndex = 4;
             this.lblCS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -135,7 +136,7 @@
             this.lblIR.AutoSize = true;
             this.lblIR.BackColor = System.Drawing.Color.YellowGreen;
             this.lblIR.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIR.Location = new System.Drawing.Point(86, 402);
+            this.lblIR.Location = new System.Drawing.Point(104, 402);
             this.lblIR.Name = "lblIR";
             this.lblIR.Size = new System.Drawing.Size(0, 22);
             this.lblIR.TabIndex = 4;
@@ -146,7 +147,7 @@
             this.lblRam.AutoSize = true;
             this.lblRam.BackColor = System.Drawing.Color.YellowGreen;
             this.lblRam.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRam.Location = new System.Drawing.Point(86, 305);
+            this.lblRam.Location = new System.Drawing.Point(102, 306);
             this.lblRam.Name = "lblRam";
             this.lblRam.Size = new System.Drawing.Size(0, 22);
             this.lblRam.TabIndex = 4;
@@ -157,7 +158,7 @@
             this.lblIM.AutoSize = true;
             this.lblIM.BackColor = System.Drawing.Color.YellowGreen;
             this.lblIM.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblIM.Location = new System.Drawing.Point(86, 209);
+            this.lblIM.Location = new System.Drawing.Point(121, 209);
             this.lblIM.Name = "lblIM";
             this.lblIM.Size = new System.Drawing.Size(0, 22);
             this.lblIM.TabIndex = 4;
@@ -179,7 +180,7 @@
             this.lblPC.AutoSize = true;
             this.lblPC.BackColor = System.Drawing.Color.YellowGreen;
             this.lblPC.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPC.Location = new System.Drawing.Point(86, 113);
+            this.lblPC.Location = new System.Drawing.Point(121, 112);
             this.lblPC.Name = "lblPC";
             this.lblPC.Size = new System.Drawing.Size(0, 22);
             this.lblPC.TabIndex = 4;
@@ -233,6 +234,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.AssemblyLabel);
             this.Controls.Add(this.panel);
+            this.DoubleBuffered = true;
             this.Name = "Emulator";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Emulator";
