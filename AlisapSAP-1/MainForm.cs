@@ -17,6 +17,8 @@ namespace AlisapSAP_1
         string currentFileDirectory=" ";
         string currentFileName=" ";
         bool cancelled = false;
+        int prevCount = 16;
+        int currCount = 0;
 
         HashSet<string> reserved = new HashSet<string>();
         HashSet<string> reserved1 = new HashSet<string>();
@@ -150,7 +152,7 @@ namespace AlisapSAP_1
             }
             else 
             {
-                File.WriteAllText("", richTextBox1.Text);  
+                File.WriteAllText(currentFileDirectory, richTextBox1.Text);  
             }
         }
 
@@ -304,7 +306,9 @@ namespace AlisapSAP_1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+            updateAssembleGUI();
+        }
+        private void updateAssembleGUI() {
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 16; j++)
@@ -323,7 +327,7 @@ namespace AlisapSAP_1
                     else
                     {
                         labels[j, i].Text = "-";
-                       // machineCode[j, i] = labels[j, i].Text;
+                        // machineCode[j, i] = labels[j, i].Text;
                     }
                 }
 
@@ -340,6 +344,7 @@ namespace AlisapSAP_1
 
 
             }
+        
         }
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
@@ -482,6 +487,25 @@ namespace AlisapSAP_1
 
 
             }*/
+            for (int i = 0; i <= 15; i++) {
+                if (machineCode[i, 2] == "-") {
+                    currCount++;
+                    //MessageBox.Show("wew");
+                
+                }
+            }
+
+            if (prevCount != currCount)
+            {
+                updateAssembleGUI();
+                prevCount = currCount;
+                currCount = 0;
+                
+            }
+            else {
+                currCount = 0;
+                
+            }
 
             Errors.AddRange(assemblerError);
             listBox1.DataSource = Errors;
