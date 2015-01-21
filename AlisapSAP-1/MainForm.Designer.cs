@@ -64,6 +64,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.loadBinFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -73,6 +77,7 @@
             this.tabPage2.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -139,6 +144,7 @@
             // 
             this.assemblerEmulatorToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.assembleCreateBinFileToolStripMenuItem,
+            this.loadBinFileToolStripMenuItem,
             this.openSAP1EmulatorToolStripMenuItem});
             this.assemblerEmulatorToolStripMenuItem.Name = "assemblerEmulatorToolStripMenuItem";
             this.assemblerEmulatorToolStripMenuItem.Size = new System.Drawing.Size(127, 20);
@@ -278,6 +284,7 @@
             // tabControl2
             // 
             this.tabControl2.Controls.Add(this.tabPage2);
+            this.tabControl2.Controls.Add(this.tabPage3);
             this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl2.Location = new System.Drawing.Point(15, 7);
             this.tabControl2.Name = "tabControl2";
@@ -425,6 +432,41 @@
             this.saveFileDialog2.Filter = "Bin Files(*.bin)|*.bin";
             this.saveFileDialog2.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog2_FileOk);
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.richTextBox2);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(15, 7, 15, 7);
+            this.tabPage3.Size = new System.Drawing.Size(455, 418);
+            this.tabPage3.TabIndex = 1;
+            this.tabPage3.Text = "Bin File";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox2.Font = new System.Drawing.Font("MS Reference Sans Serif", 15.75F, System.Drawing.FontStyle.Bold);
+            this.richTextBox2.Location = new System.Drawing.Point(15, 7);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(425, 404);
+            this.richTextBox2.TabIndex = 0;
+            this.richTextBox2.Text = "";
+            // 
+            // loadBinFileToolStripMenuItem
+            // 
+            this.loadBinFileToolStripMenuItem.Name = "loadBinFileToolStripMenuItem";
+            this.loadBinFileToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.loadBinFileToolStripMenuItem.Text = "Load Bin File";
+            this.loadBinFileToolStripMenuItem.Click += new System.EventHandler(this.loadBinFileToolStripMenuItem_Click);
+            // 
+            // openFileDialog2
+            // 
+            this.openFileDialog2.FileName = "*.bin";
+            this.openFileDialog2.Filter = "Bin Files|*.bin";
+            this.openFileDialog2.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog2_FileOk);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -452,6 +494,7 @@
             this.panel2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -495,6 +538,10 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.SaveFileDialog saveFileDialog2;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.ToolStripMenuItem loadBinFileToolStripMenuItem;
+        private System.Windows.Forms.OpenFileDialog openFileDialog2;
     }
 }
 

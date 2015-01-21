@@ -234,13 +234,15 @@ namespace AlisapSAP_1
         {
      
                 File.WriteAllText(saveFileDialog2.FileName, binFile);
-                TabPage binPage = new TabPage(saveFileDialog2.FileName);
-                tabControl2.TabPages.Add(binPage);
-                RichTextBox binRichTextbox = new RichTextBox();
-                binRichTextbox.Text = File.ReadAllText(saveFileDialog2.FileName);
-                binRichTextbox.Dock = DockStyle.Fill;
-                binPage.Controls.Add(binRichTextbox);
-                tabControl2.SelectedTab = binPage;
+                tabPage3.Text = saveFileDialog2.FileName;
+                richTextBox2.Text = File.ReadAllText(saveFileDialog2.FileName);
+                //TabPage binPage = new TabPage(saveFileDialog2.FileName);
+                //tabControl2.TabPages.Add(binPage);
+                //RichTextBox binRichTextbox = new RichTextBox();
+                //binRichTextbox.Text = File.ReadAllText(saveFileDialog2.FileName);
+                //binRichTextbox.Dock = DockStyle.Fill;
+                //binPage.Controls.Add(binRichTextbox);
+                tabControl2.SelectedTab = tabPage3;
           
         }
 
@@ -275,7 +277,38 @@ namespace AlisapSAP_1
             
             
         }
-        public void reserve() {
+       
+        private void openSAP1EmulatorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            Emulator em = new Emulator(machineCode);
+            em.ShowDialog();
+        }
+        private void loadBinFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog2.ShowDialog();
+        }
+
+        private void openFileDialog2_FileOk(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                richTextBox2.Text = File.ReadAllText(openFileDialog2.FileName);
+                tabPage3.Text = openFileDialog2.FileName;
+                tabControl2.SelectedTab = tabPage3;
+                
+            }
+            catch (IOException)
+            {
+            }
+        }
+        
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
+        public void reserve()
+        {
 
             for (int i = 0; i <= 255; i++)
             {
@@ -291,12 +324,13 @@ namespace AlisapSAP_1
                 }
                 reserved2.Add(hexValue);
             }
-            for (int i = 0; i <= 15; i++) {
+            for (int i = 0; i <= 15; i++)
+            {
                 string hexValue = i.ToString("X") + "H";
                 hexValue = "0" + i.ToString("X") + "H";
                 reserved1.Add(hexValue);
-            
-            }           
+
+            }
 
             reserved.Add("ORG");
             reserved.Add("LDA");
@@ -305,17 +339,6 @@ namespace AlisapSAP_1
             reserved.Add("OUT");
             reserved.Add("HLT");
             reserved.Add(",");
-
-        }
-
-        private void openSAP1EmulatorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Emulator em = new Emulator(machineCode);
-            em.ShowDialog();
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
 
         }
 
@@ -363,6 +386,7 @@ namespace AlisapSAP_1
         }
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
+            tabControl2.SelectedTab = tabPage2;
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 16; j++)
@@ -534,6 +558,8 @@ namespace AlisapSAP_1
             label2.Text = "Line: " + (line+1).ToString();
             label3.Text = "Column: " + (column+1).ToString();
         }
+
+       
     
     }
 }

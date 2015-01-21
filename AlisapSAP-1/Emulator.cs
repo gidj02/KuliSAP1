@@ -226,5 +226,10 @@ namespace AlisapSAP_1
         {
             State1();
         }
+
+        private void Emulator_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
