@@ -102,7 +102,7 @@ namespace AlisapSAP_1
 
             lblMoving.Text = lblRam.Text;
 
-            iStateController = machineCode[iIncrement, 0] == "0001" ? 2 : 0;
+            iStateController = machineCode[iIncrement, 0] == "0001" ? 2 : machineCode[iIncrement, 0] == "0010"? 3: 0 ; // ADD|| sUB
             
             lblRam.Text = "";
             direction = "LEFT";
