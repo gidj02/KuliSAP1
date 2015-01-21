@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlisapSAP-1", "AlisapSAP-1\AlisapSAP-1.csproj", "{DEC14EBC-9E5B-4F7B-B8CB-292888C645F6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kuliSAP1", "AlisapSAP-1\kuliSAP1.csproj", "{DEC14EBC-9E5B-4F7B-B8CB-292888C645F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

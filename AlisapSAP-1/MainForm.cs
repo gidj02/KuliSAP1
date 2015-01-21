@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using System.IO;
 
 
-namespace AlisapSAP_1
+namespace kuliSAP1
 {
     public partial class MainForm : Form
     {
@@ -234,13 +234,15 @@ namespace AlisapSAP_1
         {
      
                 File.WriteAllText(saveFileDialog2.FileName, binFile);
-                TabPage binPage = new TabPage(saveFileDialog2.FileName);
-                tabControl2.TabPages.Add(binPage);
-                RichTextBox binRichTextbox = new RichTextBox();
-                binRichTextbox.Text = File.ReadAllText(saveFileDialog2.FileName);
-                binRichTextbox.Dock = DockStyle.Fill;
-                binPage.Controls.Add(binRichTextbox);
-                tabControl2.SelectedTab = binPage;
+                tabPage3.Text = saveFileDialog2.FileName;
+                richTextBox2.Text = File.ReadAllText(saveFileDialog2.FileName);
+                //TabPage binPage = new TabPage(saveFileDialog2.FileName);
+                //tabControl2.TabPages.Add(binPage);
+                //RichTextBox binRichTextbox = new RichTextBox();
+                //binRichTextbox.Text = File.ReadAllText(saveFileDialog2.FileName);
+                //binRichTextbox.Dock = DockStyle.Fill;
+                //binPage.Controls.Add(binRichTextbox);
+                tabControl2.SelectedTab = tabPage3;
           
         }
 
@@ -275,7 +277,124 @@ namespace AlisapSAP_1
             
             
         }
-        public void reserve() {
+       
+        private void openSAP1EmulatorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tabControl2.SelectedTab = tabPage3;
+            bool parseError = false;
+           
+
+            if (String.IsNullOrEmpty(richTextBox2.Text) || String.IsNullOrWhiteSpace(richTextBox2.Text))
+            {
+                MessageBox.Show("Bin File Empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else {
+                string holder = richTextBox2.Text.Replace("\n",string.Empty);
+                holder = holder.Replace("\t",string.Empty);
+                holder = holder.Replace(" ", string.Empty);
+                holder = holder.Replace("A", " ");
+
+                String[] parseMember = holder.Trim().Split(' ');//,' ','\t','\n');
+                String[,] machineCode2 = new String[16, 3];
+
+                for (int i = 0; i <= 15; i++) {
+                    machineCode2[i,0] = machineCode[i,0];
+
+                }
+                int x=0;
+                
+                foreach (string member in parseMember)
+                {
+                    if(member.Length!=12){
+                        parseError = true;
+                        break;
+                    }
+                    if (member.Substring(0, 4) != machineCode2[x, 0]) {
+                        parseError = true;
+                        break;
+                    }
+                    machineCode2[x, 1] = member.Substring(4, 8);
+                    x++;
+                }
+                if (parseError == false)
+                {
+                    for (int i = 0; i <= 15; i++)
+                    {
+                        if (machineCode2[i, 1] == "11111111")
+                        {
+
+                            machineCode2[i, 2] = "HLT";
+                            break;
+                        }
+                        else if (machineCode2[i, 1] == "11101111")
+                        {
+
+                            machineCode2[i, 2] = "OUT";
+                        }
+                        else
+                        {
+
+
+                            if (machineCode2[i, 1].Substring(0, 4) == "0000")
+                            {
+                                machineCode2[i, 2] = "LDA" + " " + Convert.ToInt32(machineCode2[i, 1].Substring(4, 4), 2).ToString("X").PadLeft(2, '0') + "H";
+                            }
+                            else if (machineCode2[i, 1].Substring(0, 4) == "0001")
+                            {
+                                machineCode2[i, 2] = "ADD" + " " + Convert.ToInt32(machineCode2[i, 1].Substring(4, 4), 2).ToString("X").PadLeft(2, '0') + "H";
+                            }
+                            else if (machineCode2[i, 1].Substring(0, 4) == "0010")
+                            {
+                                machineCode2[i, 2] = "SUB" + " " + Convert.ToInt32(machineCode2[i, 1].Substring(4, 4), 2).ToString("X").PadLeft(2, '0') + "H";
+                            }
+                            else
+                            {
+                                parseError = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+               
+
+                if (parseError == false)
+                {
+                    Emulator em = new Emulator(machineCode2);
+                    em.ShowDialog();
+                }
+                else if (parseError == true)
+                {
+                    MessageBox.Show("Parsing Error : Make sure your bin file is correct", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);    
+                }    
+            }
+            
+          
+        }
+        private void loadBinFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog2.ShowDialog();
+        }
+
+        private void openFileDialog2_FileOk(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                richTextBox2.Text = File.ReadAllText(openFileDialog2.FileName);
+                tabPage3.Text = openFileDialog2.FileName;
+                tabControl2.SelectedTab = tabPage3;
+                
+            }
+            catch (IOException)
+            {
+            }
+        }
+        
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
+        public void reserve()
+        {
 
             for (int i = 0; i <= 255; i++)
             {
@@ -291,12 +410,13 @@ namespace AlisapSAP_1
                 }
                 reserved2.Add(hexValue);
             }
-            for (int i = 0; i <= 15; i++) {
+            for (int i = 0; i <= 15; i++)
+            {
                 string hexValue = i.ToString("X") + "H";
                 hexValue = "0" + i.ToString("X") + "H";
                 reserved1.Add(hexValue);
-            
-            }           
+
+            }
 
             reserved.Add("ORG");
             reserved.Add("LDA");
@@ -305,17 +425,6 @@ namespace AlisapSAP_1
             reserved.Add("OUT");
             reserved.Add("HLT");
             reserved.Add(",");
-
-        }
-
-        private void openSAP1EmulatorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Emulator em = new Emulator(machineCode);
-            em.ShowDialog();
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
 
         }
 
@@ -363,6 +472,7 @@ namespace AlisapSAP_1
         }
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
+            tabControl2.SelectedTab = tabPage2;
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 16; j++)
@@ -534,6 +644,8 @@ namespace AlisapSAP_1
             label2.Text = "Line: " + (line+1).ToString();
             label3.Text = "Column: " + (column+1).ToString();
         }
+
+       
     
     }
 }

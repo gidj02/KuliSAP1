@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace AlisapSAP_1
+namespace kuliSAP1
 {
     public partial class Emulator : Form
     {
@@ -257,6 +257,11 @@ namespace AlisapSAP_1
         private void button1_Click(object sender, EventArgs e)
         {
             State1();
+        }
+
+        private void Emulator_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

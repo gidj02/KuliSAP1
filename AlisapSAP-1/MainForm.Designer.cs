@@ -1,4 +1,4 @@
-﻿namespace AlisapSAP_1
+﻿namespace kuliSAP1
 {
     partial class MainForm
     {
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -37,6 +38,7 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.assemblerEmulatorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.assembleCreateBinFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadBinFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openSAP1EmulatorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sAP1ArchitectureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,6 +59,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -64,6 +68,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -71,6 +76,7 @@
             this.panel3.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -139,6 +145,7 @@
             // 
             this.assemblerEmulatorToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.assembleCreateBinFileToolStripMenuItem,
+            this.loadBinFileToolStripMenuItem,
             this.openSAP1EmulatorToolStripMenuItem});
             this.assemblerEmulatorToolStripMenuItem.Name = "assemblerEmulatorToolStripMenuItem";
             this.assemblerEmulatorToolStripMenuItem.Size = new System.Drawing.Size(127, 20);
@@ -150,6 +157,13 @@
             this.assembleCreateBinFileToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.assembleCreateBinFileToolStripMenuItem.Text = "Assemble/Create Bin File";
             this.assembleCreateBinFileToolStripMenuItem.Click += new System.EventHandler(this.assembleCreateBinFileToolStripMenuItem_Click);
+            // 
+            // loadBinFileToolStripMenuItem
+            // 
+            this.loadBinFileToolStripMenuItem.Name = "loadBinFileToolStripMenuItem";
+            this.loadBinFileToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.loadBinFileToolStripMenuItem.Text = "Load Bin File";
+            this.loadBinFileToolStripMenuItem.Click += new System.EventHandler(this.loadBinFileToolStripMenuItem_Click);
             // 
             // openSAP1EmulatorToolStripMenuItem
             // 
@@ -278,6 +292,7 @@
             // tabControl2
             // 
             this.tabControl2.Controls.Add(this.tabPage2);
+            this.tabControl2.Controls.Add(this.tabPage3);
             this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl2.Location = new System.Drawing.Point(15, 7);
             this.tabControl2.Name = "tabControl2";
@@ -355,6 +370,29 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(442, 361);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.richTextBox2);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(15, 7, 15, 7);
+            this.tabPage3.Size = new System.Drawing.Size(455, 418);
+            this.tabPage3.TabIndex = 1;
+            this.tabPage3.Text = "Bin File";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.AcceptsTab = true;
+            this.richTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox2.Font = new System.Drawing.Font("MS Reference Sans Serif", 15.75F, System.Drawing.FontStyle.Bold);
+            this.richTextBox2.Location = new System.Drawing.Point(15, 7);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(425, 404);
+            this.richTextBox2.TabIndex = 0;
+            this.richTextBox2.Text = "";
+            // 
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -395,7 +433,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(617, 6);
+            this.label3.Location = new System.Drawing.Point(546, 6);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(42, 13);
             this.label3.TabIndex = 2;
@@ -404,7 +442,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(534, 6);
+            this.label2.Location = new System.Drawing.Point(459, 6);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(27, 13);
             this.label2.TabIndex = 1;
@@ -413,7 +451,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(449, 6);
+            this.label1.Location = new System.Drawing.Point(357, 6);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(40, 13);
             this.label1.TabIndex = 0;
@@ -425,6 +463,12 @@
             this.saveFileDialog2.Filter = "Bin Files(*.bin)|*.bin";
             this.saveFileDialog2.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog2_FileOk);
             // 
+            // openFileDialog2
+            // 
+            this.openFileDialog2.FileName = "*.bin";
+            this.openFileDialog2.Filter = "Bin Files|*.bin";
+            this.openFileDialog2.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog2_FileOk);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -433,6 +477,7 @@
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "MainForm";
@@ -449,6 +494,7 @@
             this.tabControl2.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -495,6 +541,10 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.SaveFileDialog saveFileDialog2;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.ToolStripMenuItem loadBinFileToolStripMenuItem;
+        private System.Windows.Forms.OpenFileDialog openFileDialog2;
     }
 }
 
