@@ -525,6 +525,15 @@ namespace AlisapSAP_1
             Errors.AddRange(assemblerError);
             listBox1.DataSource = Errors;
         }
+
+        private void richTextBox1_MouseCaptureChanged(object sender, EventArgs e)
+        {
+            int line = richTextBox1.GetLineFromCharIndex(richTextBox1.SelectionStart);
+            int column = richTextBox1.SelectionStart - richTextBox1.GetFirstCharIndexFromLine(line);
+            //MessageBox.Show(column.ToString());
+            label2.Text = "Line: " + (line+1).ToString();
+            label3.Text = "Column: " + (column+1).ToString();
+        }
     
     }
 }

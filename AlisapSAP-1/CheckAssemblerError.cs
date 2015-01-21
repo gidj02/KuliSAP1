@@ -190,7 +190,7 @@ namespace AlisapSAP_1
                                         {
                                             if (machineCode[k, 2] == "-")
                                             {
-                                                machineCode[k, 1] = "0001" + bin;
+                                                machineCode[k, 1] = "0010" + bin;
                                                 machineCode[k, 2] = "SUB " + _words[i + 1, 0];
 
                                                 break;
