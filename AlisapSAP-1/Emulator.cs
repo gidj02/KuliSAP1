@@ -87,19 +87,48 @@ namespace AlisapSAP_1
 
             timer1.Start();
         }
+
+        private void State5()
+        {
+            currentState = 5;
+
+            lblRam.Text = searchAddress();
+            lblMoving.Top = lblRam.Top;
+            lblMoving.Left = lblRam.Left;
+
+            lblMoving.Text = lblRam.Text;
+            lblRam.Text = "";
+            direction = "LEFT";
+
+            timer1.Start();
+        }
         private void timer1_Tick(object sender, EventArgs e)
         {
             switch (direction)
             {
                 case "LEFT":
                     {
-                        if (lblMoving.Left < 320 && lblMoving.Left < 350)
-                            lblMoving.Left += 10;
+                        if (currentState == 5 && temp == 1)
+                        {
+                            if (lblMoving.Left < 470 && lblMoving.Left < 500)
+                                lblMoving.Left += 10;
+                            else
+                            {
+                                timer1.Stop();
+                            } 
+                        }
                         else
                         {
-                            if (currentState == 4) direction = "UP";
-                            else direction = "DOWN";
-                        } 
+                            if (lblMoving.Left < 320 && lblMoving.Left < 350)
+                                lblMoving.Left += 10;
+                            else
+                            {
+                                if (currentState == 4
+                                    || currentState == 5) direction = "UP";
+                                else direction = "DOWN";
+                            } 
+                        }
+                        
                         break;
                     }
                 case "DOWN":
@@ -111,12 +140,21 @@ namespace AlisapSAP_1
                     }
                 case "UP":
                     {
+                        if (currentState == 5)
+                        {
+                            temp = 1;
+                            if (lblMoving.Top > lblPC.Top && lblMoving.Top > lblPC.Top - 20)
+                                lblMoving.Top -= 10;
+                            else direction = "LEFT";
+                        }
+                        else
                         {
                             if (lblMoving.Top > lblIM.Top && lblMoving.Top > lblIM.Top - 20)
                                 lblMoving.Top -= 10;
                             else direction = "RIGHT";
-                            break;
                         }
+                        break;
+                        
                     }
                 case "RIGHT":
                     {
@@ -152,6 +190,8 @@ namespace AlisapSAP_1
                                     lblCS.Text = lblMoving.Text;
                                     lblMoving.Text = "";
                                     temp = 0;
+
+                                    timer1.Stop();
                                     State4();
                                 }
                             }
@@ -161,6 +201,7 @@ namespace AlisapSAP_1
                                 lblMoving.Text = "";
 
                                 timer1.Stop();
+                                State5();
                             }
                         }
                         break;
@@ -169,6 +210,16 @@ namespace AlisapSAP_1
                 default:
                     break;
             }
+        }
+
+        private string searchAddress()
+        {
+            for (int i = 0; i < 16; i++)
+            {
+                if (machineCode[i, 0].Substring(0, 4) == lblIM.Text) return machineCode[i, 1];
+            }
+
+            return "";
         }
 
         private void button1_Click(object sender, EventArgs e)
