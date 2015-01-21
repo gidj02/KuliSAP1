@@ -187,18 +187,20 @@
             this.sAP1ArchitectureToolStripMenuItem.Name = "sAP1ArchitectureToolStripMenuItem";
             this.sAP1ArchitectureToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.sAP1ArchitectureToolStripMenuItem.Text = "SAP-1 Architecture";
+            this.sAP1ArchitectureToolStripMenuItem.Click += new System.EventHandler(this.sAP1ArchitectureToolStripMenuItem_Click);
             // 
             // glossaryToolStripMenuItem
             // 
             this.glossaryToolStripMenuItem.Name = "glossaryToolStripMenuItem";
             this.glossaryToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.glossaryToolStripMenuItem.Text = "Glossary";
+            this.glossaryToolStripMenuItem.Click += new System.EventHandler(this.glossaryToolStripMenuItem_Click);
             // 
             // aboutSAP1ToolStripMenuItem
             // 
             this.aboutSAP1ToolStripMenuItem.Name = "aboutSAP1ToolStripMenuItem";
             this.aboutSAP1ToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
-            this.aboutSAP1ToolStripMenuItem.Text = "About SAP-1";
+            this.aboutSAP1ToolStripMenuItem.Text = "About kuliSAP";
             // 
             // openFileDialog1
             // 

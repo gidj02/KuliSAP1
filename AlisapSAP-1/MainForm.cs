@@ -645,6 +645,20 @@ namespace kuliSAP1
             label3.Text = "Column: " + (column+1).ToString();
         }
 
+        private void sAP1ArchitectureToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            SAP1Archi sap1 = new SAP1Archi();
+            sap1.ShowDialog();
+             
+        }
+
+        private void glossaryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Glossary glossary = new Glossary();
+            glossary.ShowDialog();
+        }
+
        
     
     }
