@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using System.IO;
 
 
-namespace AlisapSAP_1
+namespace kuliSAP1
 {
     public partial class MainForm : Form
     {

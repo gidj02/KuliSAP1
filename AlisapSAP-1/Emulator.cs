@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace AlisapSAP_1
+namespace kuliSAP1
 {
     public partial class Emulator : Form
     {

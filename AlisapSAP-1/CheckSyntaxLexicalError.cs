@@ -6,7 +6,7 @@ using System.Collections;
 using System.Globalization;
 
 
-namespace AlisapSAP_1
+namespace kuliSAP1
 {
     class CheckSyntaxLexicalError
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace AlisapSAP_1
+namespace kuliSAP1
 {
     class Assembler
     {

@@ -1,4 +1,4 @@
-﻿namespace AlisapSAP_1
+﻿namespace kuliSAP1
 {
     partial class Emulator
     {

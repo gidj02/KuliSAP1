@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-namespace AlisapSAP_1
+namespace kuliSAP1
 {
     class CheckAssemblerError
     {
