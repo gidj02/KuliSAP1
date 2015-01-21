@@ -243,7 +243,7 @@
             this.Name = "Emulator";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Emulator";
-            this.Load += new System.EventHandler(this.Emulator_Load);
+           
             this.panel.ResumeLayout(false);
             this.panel.PerformLayout();
             this.ResumeLayout(false);
