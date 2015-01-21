@@ -15,7 +15,7 @@ namespace AlisapSAP_1
                     currentTop = 0, 
                     currentLeft = 0,
                     currentState = 0,
-                    temp = 0;
+                    iStateController = 0;
         private string[,] machineCode;
         private string direction = "";
 
@@ -49,8 +49,13 @@ namespace AlisapSAP_1
 
             currentState = 1;
             direction = "LEFT";
+
+            lblMoving.Top = lblPC.Top;
+            lblMoving.Left = lblPC.Left;
+
             currentTop = lblMoving.Top;
             currentLeft = lblMoving.Left;
+            lblPC.Text = "";
 
             timer1.Start();
         }
@@ -58,7 +63,7 @@ namespace AlisapSAP_1
         private void State2()
         {
             currentState = 2;
-            lblPC.Text = machineCode[iIncrement, 0];
+            lblPC.Text = machineCode[iIncrement + 1, 0];
             State3();
         }
 
@@ -90,32 +95,59 @@ namespace AlisapSAP_1
 
         private void State5()
         {
-            currentState = 5;
-
-            lblRam.Text = searchAddress();
+            currentState = 5;            
+           
             lblMoving.Top = lblRam.Top;
             lblMoving.Left = lblRam.Left;
 
             lblMoving.Text = lblRam.Text;
+
+            iStateController = machineCode[iIncrement, 0] == "0001" ? 2 : 0;
+            
             lblRam.Text = "";
             direction = "LEFT";
 
             timer1.Start();
         }
+
+        public void State6()
+        {
+            if (iIncrement == 0)
+            {
+                iIncrement++;
+                State1();
+            }
+        }
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             switch (direction)
             {
                 case "LEFT":
                     {
-                        if (currentState == 5 && temp == 1)
+                        if (currentState == 5 && iStateController == 1)
                         {
-                            if (lblMoving.Left < 470 && lblMoving.Left < 500)
+                            if (lblMoving.Left < 500 && lblMoving.Left < 520)
                                 lblMoving.Left += 10;
                             else
                             {
+                                iStateController = 0;
+                                lblAccu.Text = lblMoving.Text;
+                                lblMoving.Text = "";
+
                                 timer1.Stop();
+                                State6();
                             } 
+                        }
+                        else if (currentState == 5 && iStateController == 2)
+                        {
+                            if (lblMoving.Left < 500 && lblMoving.Left < 520)
+                                lblMoving.Left += 10;
+                            else
+                            {
+                                lblReg.Text = lblMoving.Text;
+                                lblMoving.Text = "";
+                            }
                         }
                         else
                         {
@@ -142,7 +174,7 @@ namespace AlisapSAP_1
                     {
                         if (currentState == 5)
                         {
-                            temp = 1;
+                            iStateController = 1;
                             if (lblMoving.Top > lblPC.Top && lblMoving.Top > lblPC.Top - 20)
                                 lblMoving.Top -= 10;
                             else direction = "LEFT";
@@ -169,13 +201,12 @@ namespace AlisapSAP_1
                                 lblIM.Text = lblMoving.Text;
                                 lblMoving.Text = "";
                                 lblRam.Text = machineCode[iIncrement, 1];
-                                iIncrement++;
 
                                 State2();
                             }
                             else if (currentState == 3)
                             {
-                                if (temp == 0)
+                                if (iStateController == 0)
                                 {
                                     lblIR.Text = lblMoving.Text;
                                     lblMoving.Text = lblMoving.Text.Substring(0, 4);
@@ -183,13 +214,13 @@ namespace AlisapSAP_1
                                     direction = "DOWN";
                                     currentTop = lblIR.Top;
 
-                                    temp = 1;
+                                    iStateController = 1;
                                 }
-                                else if (temp == 1)
+                                else if (iStateController == 1)
                                 {
                                     lblCS.Text = lblMoving.Text;
                                     lblMoving.Text = "";
-                                    temp = 0;
+                                    iStateController = 0;
 
                                     timer1.Stop();
                                     State4();
@@ -199,6 +230,7 @@ namespace AlisapSAP_1
                             {
                                 lblIM.Text = lblMoving.Text;
                                 lblMoving.Text = "";
+                                lblRam.Text = searchAddress();
 
                                 timer1.Stop();
                                 State5();

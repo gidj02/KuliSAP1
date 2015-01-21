@@ -92,21 +92,25 @@
             // 
             // lblReg
             // 
+            this.lblReg.AutoSize = true;
             this.lblReg.BackColor = System.Drawing.Color.YellowGreen;
+            this.lblReg.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.lblReg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblReg.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblReg.Location = new System.Drawing.Point(491, 305);
+            this.lblReg.Location = new System.Drawing.Point(507, 306);
             this.lblReg.Name = "lblReg";
-            this.lblReg.Size = new System.Drawing.Size(121, 21);
+            this.lblReg.Size = new System.Drawing.Size(0, 22);
             this.lblReg.TabIndex = 4;
             this.lblReg.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblAddSub
             // 
+            this.lblAddSub.AutoSize = true;
             this.lblAddSub.BackColor = System.Drawing.Color.YellowGreen;
             this.lblAddSub.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAddSub.Location = new System.Drawing.Point(491, 204);
+            this.lblAddSub.Location = new System.Drawing.Point(507, 203);
             this.lblAddSub.Name = "lblAddSub";
-            this.lblAddSub.Size = new System.Drawing.Size(121, 21);
+            this.lblAddSub.Size = new System.Drawing.Size(0, 22);
             this.lblAddSub.TabIndex = 4;
             this.lblAddSub.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
