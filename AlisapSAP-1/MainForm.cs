@@ -140,9 +140,15 @@ namespace AlisapSAP_1
         }
         private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
-            File.WriteAllText(saveFileDialog1.FileName, richTextBox1.Text);
+            
+            tabPage1.Text = Path.GetFileName(saveFileDialog1.FileName);
+            this.Text = Path.GetDirectoryName(saveFileDialog1.FileName) + "\\" + Path.GetFileName(saveFileDialog1.FileName) + " - AlisapSAP-1";
+            currentFileDirectory = Path.GetDirectoryName(saveFileDialog1.FileName) + "\\" + Path.GetFileName(saveFileDialog1.FileName);
+            currentFileName = Path.GetFileName(saveFileDialog1.FileName);
+            isCurrentFile = true;
+
         }
-        
+      
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (isCurrentFile==false)
@@ -174,7 +180,7 @@ namespace AlisapSAP_1
                         MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                     if (result == DialogResult.Yes)
                     {
-                        
+
                     }
                     else if (result == DialogResult.No)
                     {
@@ -184,11 +190,20 @@ namespace AlisapSAP_1
                         currentFileDirectory = "";
                         currentFileName = "";
                         richTextBox1.Text = "";
-                        this.Text = "AlisapSAP-1";    
-    
+                        this.Text = "AlisapSAP-1";
+
                     }
                     else { cancelled = true; }
 
+                }
+                else {
+
+                    tabPage1.Text = "new 1";
+                    isCurrentFile = false;
+                    currentFileDirectory = "";
+                    currentFileName = "";
+                    richTextBox1.Text = "";
+                    this.Text = "AlisapSAP-1";
                 }
      
             }
@@ -217,7 +232,16 @@ namespace AlisapSAP_1
         }
         private void saveFileDialog2_FileOk(object sender, CancelEventArgs e)
         {
-            File.WriteAllText(saveFileDialog2.FileName, binFile);
+     
+                File.WriteAllText(saveFileDialog2.FileName, binFile);
+                TabPage binPage = new TabPage(saveFileDialog2.FileName);
+                tabControl2.TabPages.Add(binPage);
+                RichTextBox binRichTextbox = new RichTextBox();
+                binRichTextbox.Text = File.ReadAllText(saveFileDialog2.FileName);
+                binRichTextbox.Dock = DockStyle.Fill;
+                binPage.Controls.Add(binRichTextbox);
+                tabControl2.SelectedTab = binPage;
+          
         }
 
         private void assembleCreateBinFileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -236,16 +260,7 @@ namespace AlisapSAP_1
                     //File.WriteAllText(currentFileDirectory, binFile);
                     saveFileDialog2.InitialDirectory = currentFileDirectory;
                     saveFileDialog2.FileName = currentFileName.Remove(currentFileName.Length - 5);
-                    saveFileDialog2.ShowDialog();
-
-                    
-                    TabPage binPage = new TabPage(saveFileDialog2.FileName);
-                    tabControl2.TabPages.Add(binPage);
-                    RichTextBox binRichTextbox = new RichTextBox();
-                    binRichTextbox.Text = File.ReadAllText(saveFileDialog2.FileName);    
-                    binRichTextbox.Dock = DockStyle.Fill;
-                    binPage.Controls.Add(binRichTextbox);
-                    tabControl2.SelectedTab = binPage;
+                    saveFileDialog2.ShowDialog(); 
                     
                 }
                 else {
