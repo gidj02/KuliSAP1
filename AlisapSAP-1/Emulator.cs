@@ -40,7 +40,7 @@ namespace kuliSAP1
                 }
             }
 
-            AssemblyLabel.Text = sLabel;
+            lblAssembly.Text = sLabel;
         }
 
         private void State1()
@@ -72,12 +72,28 @@ namespace kuliSAP1
 
         private void State4()
         {
-            setLblMoving(3);
-           
-            currentState = 4;
-            direction = "LEFT";
+            if (iStateController == -1)
+            {
+                setLblMoving(6);
+                direction = "RIGHT";
 
-            timer1.Start();
+                currentState = 4;
+                timer1.Start();
+            }
+            else if (iStateController == -2)
+            {
+                MessageBox.Show("System Halted!"); // END OF SYNCHRONOUS
+                btnSync.Enabled = true;
+                btnJump.Enabled = true;
+            }
+            else
+            {
+                setLblMoving(3);
+                direction = "LEFT";
+
+                currentState = 4;
+                timer1.Start();
+            }
         }
 
         private void State5()
@@ -148,6 +164,24 @@ namespace kuliSAP1
                                 State6();
                             }
                         }
+                        else if (currentState == 4 && iStateController == -1) // out
+                        {
+                            if (lblMoving.Left < 500 && lblMoving.Left < 520)
+                                lblMoving.Left += 10;
+                            else
+                            {
+                                lblOR.Text = lblMoving.Text;
+                                lblMoving.Text = "";
+
+                                iStateController = 0;
+
+                                lblBO.Text = Convert.ToInt32(lblOR.Text, 2).ToString();
+                                timer1.Stop();
+
+                                iIncrement++;
+                                State1();// OUT straight to state 1
+                            }
+                        }
                         else if (currentState == 6) // data going to accumulator
                         {
                             if (lblMoving.Left < 500 && lblMoving.Left < 520)
@@ -178,9 +212,19 @@ namespace kuliSAP1
                     }
                 case "DOWN":
                     {
-                        if (lblMoving.Top < currentTop + 90 && lblMoving.Top < currentTop + 110)
-                            lblMoving.Top += 10;
-                        else direction = "RIGHT";
+                        if (currentState == 4 && iStateController == -1)
+                        {
+                            if (lblMoving.Top < lblOR.Top && lblMoving.Top < lblOR.Top + 20)
+                                lblMoving.Top += 10;
+                            else direction = "LEFT";
+                        }
+                        else
+                        {
+                            if (lblMoving.Top < currentTop + 90 && lblMoving.Top < currentTop + 110)
+                                lblMoving.Top += 10;
+                            else direction = "RIGHT";
+                        }
+                        
                         break;
                     }
                 case "UP":
@@ -209,13 +253,19 @@ namespace kuliSAP1
                     }
                 case "RIGHT":
                     {
-                        if (currentState == 6)
+                        if (currentState == 6) 
                         {
                             if (lblMoving.Left > currentLeft - 190 && lblMoving.Left > currentLeft - 210)
                                 lblMoving.Left -= 10;
                             else direction = "UP";
                         }
-                        if (lblMoving.Left > currentLeft + 40 && lblMoving.Left > currentLeft)
+                        else if (currentState == 4 && iStateController == -1) // OUT
+                        {
+                            if (lblMoving.Left > currentLeft - 190 && lblMoving.Left > currentLeft - 210)
+                                lblMoving.Left -= 10;
+                            else direction = "DOWN";
+                        }
+                        else if (lblMoving.Left > currentLeft + 40 && lblMoving.Left > currentLeft)
                             lblMoving.Left -= 10;
                         else
                         {
@@ -249,6 +299,14 @@ namespace kuliSAP1
                                             lblMoving.Text = "";
                                             iStateController = 0;
 
+                                            if (lblCS.Text == "1110")
+                                            {
+                                                iStateController = -1; // OUT
+                                            }
+                                            else if(lblCS.Text == "1111")
+                                            {
+                                                iStateController = -2; // HALTED
+                                            }
                                             timer1.Stop();
                                             State4();
                                         }
@@ -286,6 +344,10 @@ namespace kuliSAP1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            btnSync.Enabled = false;
+            btnJump.Enabled = false;
+
+            lblMoving.Visible = true;
             State1();
         }
 
@@ -341,7 +403,19 @@ namespace kuliSAP1
                         lblAddSub.Text = "";
                         break;
                     }
+                case 6: // Accumulator (OUT - State 4)
+                    {
+                        lblMoving.Top = lblAccu.Top;
+                        lblMoving.Left = lblAccu.Left;
+                        lblMoving.Text = lblAccu.Text;
+                        currentTop = lblMoving.Top;
+                        currentLeft = lblMoving.Left;
+                        lblAccu.Text = "";
+                        break;
+                    }
             }
         }
+
+        
     }
 }
