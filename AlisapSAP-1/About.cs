@@ -26,7 +26,7 @@ namespace kuliSAP1
         private void panel6_Paint(object sender, PaintEventArgs e)
         {
             using (var brush = new LinearGradientBrush(this.ClientRectangle,
-             Color.White, Color.SkyBlue, LinearGradientMode.ForwardDiagonal))
+              Color.White, Color.DeepSkyBlue, LinearGradientMode.ForwardDiagonal))
             {
                 e.Graphics.FillRectangle(brush, this.ClientRectangle);
             }
@@ -36,7 +36,7 @@ namespace kuliSAP1
         private void panel3_Paint(object sender, PaintEventArgs e)
         {
             using (var brush = new LinearGradientBrush(this.ClientRectangle,
-                Color.White, Color.SkyBlue, LinearGradientMode.ForwardDiagonal))
+                Color.White, Color.DeepSkyBlue, LinearGradientMode.ForwardDiagonal))
             {
                 e.Graphics.FillRectangle(brush, this.ClientRectangle);
             }

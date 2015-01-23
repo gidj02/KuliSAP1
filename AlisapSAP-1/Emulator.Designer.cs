@@ -302,6 +302,7 @@
             this.Controls.Add(this.lblAssembly);
             this.Controls.Add(this.panel);
             this.DoubleBuffered = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Emulator";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Emulator";

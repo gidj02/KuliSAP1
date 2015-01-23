@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Drawing.Drawing2D;
 
 namespace kuliSAP1
 {
@@ -69,6 +70,24 @@ namespace kuliSAP1
 
 
           
+        }
+
+        private void Glossary_Paint(object sender, PaintEventArgs e)
+        {
+            using (var brush = new LinearGradientBrush(this.ClientRectangle,
+               Color.White, Color.SkyBlue, LinearGradientMode.ForwardDiagonal))
+            {
+                e.Graphics.FillRectangle(brush, this.ClientRectangle);
+            }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+            using (var brush = new LinearGradientBrush(this.ClientRectangle,
+               Color.White, Color.DeepSkyBlue, LinearGradientMode.ForwardDiagonal))
+            {
+                e.Graphics.FillRectangle(brush, this.ClientRectangle);
+            }
         }
     }
 }
