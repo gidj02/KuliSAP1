@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Drawing.Drawing2D;
 
 namespace kuliSAP1
 {
@@ -15,20 +16,30 @@ namespace kuliSAP1
         {
             InitializeComponent();
         }
-
-        private void label3_Click(object sender, EventArgs e)
+    
+      
+        private void About_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void label4_Click(object sender, EventArgs e)
+        private void panel6_Paint(object sender, PaintEventArgs e)
         {
-
+            using (var brush = new LinearGradientBrush(this.ClientRectangle,
+             Color.White, Color.SkyBlue, LinearGradientMode.ForwardDiagonal))
+            {
+                e.Graphics.FillRectangle(brush, this.ClientRectangle);
+            }
+          
         }
 
-        private void label6_Click(object sender, EventArgs e)
+        private void panel3_Paint(object sender, PaintEventArgs e)
         {
-
+            using (var brush = new LinearGradientBrush(this.ClientRectangle,
+                Color.White, Color.SkyBlue, LinearGradientMode.ForwardDiagonal))
+            {
+                e.Graphics.FillRectangle(brush, this.ClientRectangle);
+            }
         }
     }
 }
