@@ -134,7 +134,8 @@ namespace kuliSAP1
         private void SyncState5()
         {
             setLblMoving(4);
-            iStateController = machineCode[iIncrement, 0] == "0001" ? 2 : 0;
+
+            iStateController = machineCode[iIncrement, 0] == "0001" || machineCode[iIncrement, 0] == "0010" ? 2 : 0;
             
             iCurrentState = 5;   
             direction = "LEFT";
@@ -192,10 +193,20 @@ namespace kuliSAP1
                                 lblMoving.Left += 10;
                             else
                             {
+                                int value = 0;
+
                                 lblReg.Text = lblMoving.Text;
                                 lblMoving.Text = "";
 
-                                int value = Convert.ToInt32(lblAccu.Text, 2) + Convert.ToInt32(lblReg.Text, 2);
+                                if (machineCode[iIncrement, 0] == "0001")
+                                {
+                                    value = Convert.ToInt32(lblAccu.Text, 2) + Convert.ToInt32(lblReg.Text, 2);
+                                }
+                                else if (machineCode[iIncrement, 0] == "0010")
+                                {
+                                    value = Convert.ToInt32(lblAccu.Text, 2) - Convert.ToInt32(lblReg.Text, 2);
+                                }
+                                
                                 lblAddSub.Text = Convert.ToString(value, 2);
 
                                 iStateController = 0;
@@ -480,7 +491,7 @@ namespace kuliSAP1
         {
             lblState.Text = "State 5";
             setLblMoving(4);
-            iStateController = machineCode[iIncrement, 0] == "0001" ? 2 : 0;
+            iStateController = machineCode[iIncrement, 0] == "0001" || machineCode[iIncrement, 0] == "0010" ? 2 : 0;
 
             iCurrentState = 5;
             direction = "LEFT";
@@ -536,10 +547,20 @@ namespace kuliSAP1
                                 lblMoving.Left += 10;
                             else
                             {
+                                int value = 0;
+
                                 lblReg.Text = lblMoving.Text;
                                 lblMoving.Text = "";
 
-                                int value = Convert.ToInt32(lblAccu.Text, 2) + Convert.ToInt32(lblReg.Text, 2);
+                                if (machineCode[iIncrement, 0] == "0001")
+                                {
+                                    value = Convert.ToInt32(lblAccu.Text, 2) + Convert.ToInt32(lblReg.Text, 2);
+                                }
+                                else if (machineCode[iIncrement, 0] == "0010")
+                                {
+                                    value = Convert.ToInt32(lblAccu.Text, 2) - Convert.ToInt32(lblReg.Text, 2);
+                                }
+
                                 lblAddSub.Text = Convert.ToString(value, 2);
 
                                 iStateController = 0;
