@@ -83,12 +83,11 @@
             // 
             // menuStrip1
             // 
-<<<<<<< HEAD
+
             this.menuStrip1.BackColor = System.Drawing.Color.LightBlue;
-=======
+
             this.menuStrip1.BackColor = System.Drawing.Color.LightSkyBlue;
             this.menuStrip1.Font = new System.Drawing.Font("Corbel", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
->>>>>>> 79268ae7e7b719a098cbc82e8f1d20263de49ae4
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.assemblerEmulatorToolStripMenuItem,
@@ -235,13 +234,13 @@
             // 
             // tabPage1
             // 
-<<<<<<< HEAD
+
             this.tabPage1.BackColor = System.Drawing.Color.LightBlue;
             this.tabPage1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-=======
+
             this.tabPage1.BackColor = System.Drawing.Color.PowderBlue;
             this.tabPage1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tabPage1.BackgroundImage")));
->>>>>>> 79268ae7e7b719a098cbc82e8f1d20263de49ae4
+
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.panel4);
@@ -255,10 +254,9 @@
             this.tabPage1.Size = new System.Drawing.Size(976, 618);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "new 1";
-<<<<<<< HEAD
+
             this.tabPage1.Paint += new System.Windows.Forms.PaintEventHandler(this.tabPage1_Paint);
-=======
->>>>>>> 79268ae7e7b719a098cbc82e8f1d20263de49ae4
+
             // 
             // label5
             // 
@@ -307,13 +305,11 @@
             // 
             // panel3
             // 
-<<<<<<< HEAD
-            this.panel3.BackColor = System.Drawing.SystemColors.Window;
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-=======
+
+
             this.panel3.BackColor = System.Drawing.Color.Transparent;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
->>>>>>> 79268ae7e7b719a098cbc82e8f1d20263de49ae4
+
             this.panel3.Controls.Add(this.tabControl2);
             this.panel3.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel3.Location = new System.Drawing.Point(476, 30);
@@ -336,11 +332,9 @@
             // 
             // tabPage2
             // 
-<<<<<<< HEAD
-            this.tabPage2.BackColor = System.Drawing.SystemColors.Window;
-=======
+
             this.tabPage2.BackColor = System.Drawing.Color.LightSkyBlue;
->>>>>>> 79268ae7e7b719a098cbc82e8f1d20263de49ae4
+
             this.tabPage2.Controls.Add(this.label8);
             this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Controls.Add(this.label6);
@@ -434,13 +428,10 @@
             // 
             // panel2
             // 
-<<<<<<< HEAD
-            this.panel2.BackColor = System.Drawing.SystemColors.Window;
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-=======
+
             this.panel2.BackColor = System.Drawing.Color.Transparent;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
->>>>>>> 79268ae7e7b719a098cbc82e8f1d20263de49ae4
+
             this.panel2.Controls.Add(this.richTextBox1);
             this.panel2.Location = new System.Drawing.Point(3, 30);
             this.panel2.Name = "panel2";
@@ -466,21 +457,17 @@
             // 
             // panel1
             // 
-<<<<<<< HEAD
-            this.panel1.BackColor = System.Drawing.SystemColors.Window;
-=======
+
             this.panel1.BackColor = System.Drawing.Color.Transparent;
->>>>>>> 79268ae7e7b719a098cbc82e8f1d20263de49ae4
+
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-<<<<<<< HEAD
-            this.panel1.Location = new System.Drawing.Point(3, 588);
-=======
+
             this.panel1.Location = new System.Drawing.Point(3, 589);
->>>>>>> 79268ae7e7b719a098cbc82e8f1d20263de49ae4
+
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(966, 26);
             this.panel1.TabIndex = 2;

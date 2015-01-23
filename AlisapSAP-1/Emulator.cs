@@ -787,7 +787,16 @@ namespace kuliSAP1
 
         private void btnReset_Click(object sender, EventArgs e)
         {
+            btnJump.Enabled = true;
+            btnSync.Enabled = true;
+
+            timerJump.Stop();
+            timerSynchronous.Stop();
+
             Reset();
+
+            iIncrement = 0;
+            iStateController = 0;
             iJumpStateController = -1;
         }
     }
