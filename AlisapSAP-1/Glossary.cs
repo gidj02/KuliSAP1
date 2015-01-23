@@ -23,7 +23,7 @@ namespace kuliSAP1
 
         private void Glossary_Load(object sender, EventArgs e)
         {
-
+            richTextBox1.Text = "Welcome to Glossary feel free to search a definition for you word (relative to SAP-1).";
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -33,6 +33,10 @@ namespace kuliSAP1
             {
                 richTextBox1.Text = glossaryList[textBox1.Text];
               
+            }
+            else
+            {
+                richTextBox1.Text = "Welcome to Glossary feel free to search a definition for you word (relative to SAP-1).";
             }
         }
         private void addGlossaryItem() {

@@ -25,10 +25,5 @@ namespace kuliSAP1
                 e.Graphics.FillRectangle(brush, this.ClientRectangle);
             }
         }
-
-        private void SAP1Archi_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
