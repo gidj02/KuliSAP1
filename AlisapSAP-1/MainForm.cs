@@ -665,6 +665,11 @@ namespace kuliSAP1
             about.ShowDialog();
         }
 
+        private void MainForm_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
        
     
     }
