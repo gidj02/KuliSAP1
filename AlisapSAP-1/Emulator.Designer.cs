@@ -46,7 +46,9 @@
             this.lblAssembly = new System.Windows.Forms.Label();
             this.btnJump = new System.Windows.Forms.Button();
             this.btnSync = new System.Windows.Forms.Button();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timerSynchronous = new System.Windows.Forms.Timer(this.components);
+            this.timerJump = new System.Windows.Forms.Timer(this.components);
+            this.btnReset = new System.Windows.Forms.Button();
             this.panel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -251,6 +253,7 @@
             this.btnJump.TabIndex = 2;
             this.btnJump.Text = "Jump";
             this.btnJump.UseVisualStyleBackColor = false;
+            this.btnJump.Click += new System.EventHandler(this.btnJump_Click);
             // 
             // btnSync
             // 
@@ -263,18 +266,37 @@
             this.btnSync.TabIndex = 3;
             this.btnSync.Text = "Synchronous";
             this.btnSync.UseVisualStyleBackColor = false;
-            this.btnSync.Click += new System.EventHandler(this.button1_Click);
+            this.btnSync.Click += new System.EventHandler(this.btnSync_Click);
             // 
-            // timer1
+            // timerSynchronous
             // 
-            this.timer1.Interval = 1;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timerSynchronous.Interval = 1;
+            this.timerSynchronous.Tick += new System.EventHandler(this.timerSynchronous_Tick);
+            // 
+            // timerJump
+            // 
+            this.timerJump.Interval = 1;
+            this.timerJump.Tick += new System.EventHandler(this.timerJump_Tick);
+            // 
+            // btnReset
+            // 
+            this.btnReset.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnReset.Font = new System.Drawing.Font("Corbel", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReset.ForeColor = System.Drawing.Color.Black;
+            this.btnReset.Location = new System.Drawing.Point(84, 449);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(184, 47);
+            this.btnReset.TabIndex = 4;
+            this.btnReset.Text = "Reset";
+            this.btnReset.UseVisualStyleBackColor = false;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // Emulator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1031, 658);
+            this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnJump);
             this.Controls.Add(this.btnSync);
             this.Controls.Add(this.lblAssembly);
@@ -306,7 +328,9 @@
         protected internal System.Windows.Forms.Label lblReg;
         protected internal System.Windows.Forms.Label lblOR;
         protected internal System.Windows.Forms.Label lblBO;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timerSynchronous;
         private System.Windows.Forms.Label lblState;
+        private System.Windows.Forms.Timer timerJump;
+        private System.Windows.Forms.Button btnReset;
     }
 }

@@ -12,10 +12,11 @@ namespace kuliSAP1
     public partial class Emulator : Form
     {
         private int iIncrement = 0,
-                    currentTop = 0, 
-                    currentLeft = 0,
-                    currentState = 0,
-                    iStateController = 0;
+                    iCurrentTop = 0,
+                    iCurrentLeft = 0,
+                    iCurrentState = 0,
+                    iStateController = 0,
+                    iJumpStateController = -1;
         private string[,] machineCode;
         private string direction = "";
 
@@ -43,46 +44,77 @@ namespace kuliSAP1
             lblAssembly.Text = sLabel;
         }
 
-        private void State1()
+        private void btnSync_Click(object sender, EventArgs e)
+        {
+            Reset();
+            btnSync.Enabled = false;
+            btnJump.Enabled = false;
+
+            lblMoving.Visible = true;
+            SyncState1();
+        }
+
+        private void btnJump_Click(object sender, EventArgs e)
+        {
+            if (iJumpStateController == -1)
+            {
+                Reset();
+                iJumpStateController++;
+            }
+            btnSync.Enabled = false;
+            btnJump.Enabled = false;
+
+            lblMoving.Visible = true;
+            JumpController(++iJumpStateController);
+        }
+
+        /* 
+         * 
+         * Start of Synchronous Part
+         * 
+         */
+
+        private void SyncState1()
         {
             setLblMoving(1);
 
-            currentState = 1;
+            iCurrentState = 1;
             direction = "LEFT";
 
-            timer1.Start();
+            timerSynchronous.Start();
         }
 
-        private void State2()
+        private void SyncState2()
         {
-            currentState = 2;
+            iCurrentState = 2;
             lblPC.Text = machineCode[iIncrement + 1, 0];
-            State3();
+            SyncState3();
         }
 
-        private void State3()
+        private void SyncState3()
         {
             setLblMoving(2);
 
-            currentState = 3;           
+            iCurrentState = 3;           
             direction = "LEFT";
   
-            timer1.Start();
+            timerSynchronous.Start();
         }
 
-        private void State4()
+        private void SyncState4()
         {
             if (iStateController == -1)
             {
                 setLblMoving(6);
                 direction = "RIGHT";
 
-                currentState = 4;
-                timer1.Start();
+                iCurrentState = 4;
+                timerSynchronous.Start();
             }
             else if (iStateController == -2)
             {
                 MessageBox.Show("System Halted!"); // END OF SYNCHRONOUS
+                iJumpStateController = -1;
                 btnSync.Enabled = true;
                 btnJump.Enabled = true;
             }
@@ -91,48 +123,48 @@ namespace kuliSAP1
                 setLblMoving(3);
                 direction = "LEFT";
 
-                currentState = 4;
-                timer1.Start();
+                iCurrentState = 4;
+                timerSynchronous.Start();
             }
         }
 
-        private void State5()
+        private void SyncState5()
         {
             setLblMoving(4);
             iStateController = machineCode[iIncrement, 0] == "0001" ? 2 : 0;
             
-            currentState = 5;   
+            iCurrentState = 5;   
             direction = "LEFT";
 
-            timer1.Start();
+            timerSynchronous.Start();
         }
 
-        public void State6()
+        public void SyncState6()
         {
             if (iIncrement == 0)
             {
-                State1();
+                SyncState1();
             }
             else if (lblAddSub.Text != "")
             {
                 setLblMoving(5);
 
-                currentState = 6;
+                iCurrentState = 6;
                 direction = "RIGHT";
 
-                timer1.Start();
+                timerSynchronous.Start();
             }
 
             iIncrement++;
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timerSynchronous_Tick(object sender, EventArgs e)
         {
             switch (direction)
             {
                 case "LEFT":
                     {
-                        if (currentState == 5 && iStateController == 1) //data going to accumulator
+                        if (iCurrentState == 5 && iStateController == 1) //data going to accumulator
                         {
                             if (lblMoving.Left < 500 && lblMoving.Left < 520)
                                 lblMoving.Left += 10;
@@ -142,11 +174,11 @@ namespace kuliSAP1
                                 lblAccu.Text = lblMoving.Text;
                                 lblMoving.Text = "";
 
-                                timer1.Stop();
-                                State6();
+                                timerSynchronous.Stop();
+                                SyncState6();
                             } 
                         }
-                        else if (currentState == 5 && iStateController == 2) // data going to register
+                        else if (iCurrentState == 5 && iStateController == 2) // data going to register
                         {
                             if (lblMoving.Left < 500 && lblMoving.Left < 520)
                                 lblMoving.Left += 10;
@@ -160,11 +192,11 @@ namespace kuliSAP1
 
                                 iStateController = 0;
 
-                                timer1.Stop();
-                                State6();
+                                timerSynchronous.Stop();
+                                SyncState6();
                             }
                         }
-                        else if (currentState == 4 && iStateController == -1) // out
+                        else if (iCurrentState == 4 && iStateController == -1) // out
                         {
                             if (lblMoving.Left < 500 && lblMoving.Left < 520)
                                 lblMoving.Left += 10;
@@ -176,13 +208,13 @@ namespace kuliSAP1
                                 iStateController = 0;
 
                                 lblBO.Text = Convert.ToInt32(lblOR.Text, 2).ToString();
-                                timer1.Stop();
+                                timerSynchronous.Stop();
 
                                 iIncrement++;
-                                State1();// OUT straight to state 1
+                                SyncState1();// OUT straight to state 1
                             }
                         }
-                        else if (currentState == 6) // data going to accumulator
+                        else if (iCurrentState == 6) // data going to accumulator
                         {
                             if (lblMoving.Left < 500 && lblMoving.Left < 520)
                                 lblMoving.Left += 10;
@@ -192,8 +224,8 @@ namespace kuliSAP1
                                 lblAccu.Text = lblMoving.Text;
                                 lblMoving.Text = "";
 
-                                timer1.Stop();
-                                State1();
+                                timerSynchronous.Stop();
+                                SyncState1();
                             } 
                             
                         }
@@ -203,7 +235,7 @@ namespace kuliSAP1
                                 lblMoving.Left += 10;
                             else
                             {
-                                if (currentState == 4|| currentState == 5) direction = "UP";
+                                if (iCurrentState == 4|| iCurrentState == 5) direction = "UP";
                                 else direction = "DOWN";
                             } 
                         }
@@ -212,7 +244,7 @@ namespace kuliSAP1
                     }
                 case "DOWN":
                     {
-                        if (currentState == 4 && iStateController == -1)
+                        if (iCurrentState == 4 && iStateController == -1)
                         {
                             if (lblMoving.Top < lblOR.Top && lblMoving.Top < lblOR.Top + 20)
                                 lblMoving.Top += 10;
@@ -220,7 +252,7 @@ namespace kuliSAP1
                         }
                         else
                         {
-                            if (lblMoving.Top < currentTop + 90 && lblMoving.Top < currentTop + 110)
+                            if (lblMoving.Top < iCurrentTop + 90 && lblMoving.Top < iCurrentTop + 110)
                                 lblMoving.Top += 10;
                             else direction = "RIGHT";
                         }
@@ -229,14 +261,14 @@ namespace kuliSAP1
                     }
                 case "UP":
                     {
-                        if (currentState == 5) // on the way to accumulator
+                        if (iCurrentState == 5) // on the way to accumulator
                         {
                             iStateController = 1;
                             if (lblMoving.Top > lblPC.Top && lblMoving.Top > lblPC.Top - 20)
                                 lblMoving.Top -= 10;
                             else direction = "LEFT";
                         }
-                        else if (currentState == 6) // on the way to accumulator
+                        else if (iCurrentState == 6) // on the way to accumulator
                         {
                             if (lblMoving.Top > lblPC.Top && lblMoving.Top > lblPC.Top - 20)
                                 lblMoving.Top -= 10;
@@ -253,23 +285,23 @@ namespace kuliSAP1
                     }
                 case "RIGHT":
                     {
-                        if (currentState == 6) 
+                        if (iCurrentState == 6) 
                         {
-                            if (lblMoving.Left > currentLeft - 190 && lblMoving.Left > currentLeft - 210)
+                            if (lblMoving.Left > iCurrentLeft - 190 && lblMoving.Left > iCurrentLeft - 210)
                                 lblMoving.Left -= 10;
                             else direction = "UP";
                         }
-                        else if (currentState == 4 && iStateController == -1) // OUT
+                        else if (iCurrentState == 4 && iStateController == -1) // OUT
                         {
-                            if (lblMoving.Left > currentLeft - 190 && lblMoving.Left > currentLeft - 210)
+                            if (lblMoving.Left > iCurrentLeft - 190 && lblMoving.Left > iCurrentLeft - 210)
                                 lblMoving.Left -= 10;
                             else direction = "DOWN";
                         }
-                        else if (lblMoving.Left > currentLeft + 40 && lblMoving.Left > currentLeft)
+                        else if (lblMoving.Left > iCurrentLeft + 40 && lblMoving.Left > iCurrentLeft)
                             lblMoving.Left -= 10;
                         else
                         {
-                            switch (currentState)
+                            switch (iCurrentState)
                             {
                                 case 1: //state 1
                                     {
@@ -277,8 +309,8 @@ namespace kuliSAP1
                                         lblMoving.Text = "";
                                         lblRam.Text = machineCode[iIncrement, 1];
 
-                                        timer1.Stop();
-                                        State2();
+                                        timerSynchronous.Stop();
+                                        SyncState2();
                                         break;
                                     }
                                 case 3: //state 3
@@ -289,7 +321,7 @@ namespace kuliSAP1
                                             lblMoving.Text = lblMoving.Text.Substring(0, 4);
 
                                             direction = "DOWN";
-                                            currentTop = lblIR.Top;
+                                            iCurrentTop = lblIR.Top;
 
                                             iStateController = 1; // go to Control Sequencer
                                         }
@@ -307,8 +339,8 @@ namespace kuliSAP1
                                             {
                                                 iStateController = -2; // HALTED
                                             }
-                                            timer1.Stop();
-                                            State4();
+                                            timerSynchronous.Stop();
+                                            SyncState4();
                                         }
                                         break;
                                     }
@@ -318,8 +350,8 @@ namespace kuliSAP1
                                         lblMoving.Text = "";
                                         lblRam.Text = searchAddress();
 
-                                        timer1.Stop();
-                                        State5();
+                                        timerSynchronous.Stop();
+                                        SyncState5();
                                         break;
                                     }
                             }// switch for states
@@ -332,24 +364,345 @@ namespace kuliSAP1
             }
         }
 
-        private string searchAddress()
+        /* 
+         * 
+         * End of Synchronous Part
+         *  
+         */
+
+
+        /* 
+         * 
+         * Start of Jump Part
+         * 
+         */
+        private void JumpController(int iTempController)
         {
-            for (int i = 0; i < 16; i++)
+            switch (iTempController)
             {
-                if (machineCode[i, 0].Substring(0, 4) == lblIM.Text) return machineCode[i, 1];
+                case 1: JumpState1(); break;
+                case 2: JumpState2(); break;
+                case 3: JumpState3(); break;
+                case 4: JumpState4(); break;
+                case 5: JumpState5(); break;
+                case 6: JumpState6(); break;
             }
-
-            return "";
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void JumpState1()
         {
-            btnSync.Enabled = false;
-            btnJump.Enabled = false;
+            setLblMoving(1);
 
-            lblMoving.Visible = true;
-            State1();
+            iCurrentState = 1;
+            direction = "LEFT";
+
+            lblState.Text = "State 1";
+            timerJump.Start();
         }
+
+        private void JumpState2()
+        {
+            lblState.Text = "State 2";
+
+            iCurrentState = 2;
+            lblPC.Text = machineCode[iIncrement + 1, 0];
+
+            btnSync.Enabled = true;
+            btnJump.Enabled = true;
+        }
+
+        private void JumpState3()
+        {
+            lblState.Text = "State 3";
+            setLblMoving(2);
+
+            iCurrentState = 3;
+            direction = "LEFT";
+
+            timerJump.Start();
+        }
+
+        private void JumpState4()
+        {
+            lblState.Text = "State 4";
+            if (iStateController == -1)
+            {
+                setLblMoving(6);
+                direction = "RIGHT";
+
+                iCurrentState = 4;
+                timerJump.Start();
+            }
+            else if (iStateController == -2)
+            {
+                MessageBox.Show("System Halted!"); // END OF SYNCHRONOUS
+                btnSync.Enabled = true;
+                btnJump.Enabled = true;
+                iCurrentState = 0;
+            }
+            else
+            {
+                setLblMoving(3);
+                direction = "LEFT";
+
+                iCurrentState = 4;
+                timerJump.Start();
+            }
+        }
+
+        private void JumpState5()
+        {
+            lblState.Text = "State 5";
+            setLblMoving(4);
+            iStateController = machineCode[iIncrement, 0] == "0001" ? 2 : 0;
+
+            iCurrentState = 5;
+            direction = "LEFT";
+
+            timerJump.Start();
+        }
+
+        public void JumpState6()
+        {
+           lblState.Text = "State 6";
+           if (lblAddSub.Text != "")
+            {
+                setLblMoving(5);
+
+                iCurrentState = 6;
+                direction = "RIGHT";
+
+                timerJump.Start();
+            }
+            if (iIncrement == 0)
+            {
+                btnSync.Enabled = true;
+                btnJump.Enabled = true;
+            }
+            iIncrement++;
+            iJumpStateController = 0;
+        }
+
+        private void timerJump_Tick(object sender, EventArgs e)
+        {
+            switch (direction)
+            {
+                case "LEFT":
+                    {
+                        if (iCurrentState == 5 && iStateController == 1) //data going to accumulator
+                        {
+                            if (lblMoving.Left < 500 && lblMoving.Left < 520)
+                                lblMoving.Left += 10;
+                            else
+                            {
+                                iStateController = 0;
+                                lblAccu.Text = lblMoving.Text;
+                                lblMoving.Text = "";
+
+                                timerJump.Stop();
+                                btnSync.Enabled = true;
+                                btnJump.Enabled = true;
+                            }
+                        }
+                        else if (iCurrentState == 5 && iStateController == 2) // data going to register
+                        {
+                            if (lblMoving.Left < 500 && lblMoving.Left < 520)
+                                lblMoving.Left += 10;
+                            else
+                            {
+                                lblReg.Text = lblMoving.Text;
+                                lblMoving.Text = "";
+
+                                int value = Convert.ToInt32(lblAccu.Text, 2) + Convert.ToInt32(lblReg.Text, 2);
+                                lblAddSub.Text = Convert.ToString(value, 2);
+
+                                iStateController = 0;
+
+                                timerJump.Stop();
+                                btnSync.Enabled = true;
+                                btnJump.Enabled = true;
+                            }
+                        }
+                        else if (iCurrentState == 4 && iStateController == -1) // out
+                        {
+                            if (lblMoving.Left < 500 && lblMoving.Left < 520)
+                                lblMoving.Left += 10;
+                            else
+                            {
+                                lblOR.Text = lblMoving.Text;
+                                lblMoving.Text = "";
+
+                                iStateController = 0;
+
+                                lblBO.Text = Convert.ToInt32(lblOR.Text, 2).ToString();
+                                timerJump.Stop();
+
+                                btnSync.Enabled = true;
+                                btnJump.Enabled = true;
+
+                                iJumpStateController = 0;
+                                iIncrement++;
+                            }
+                        }
+                        else if (iCurrentState == 6) // data going to accumulator
+                        {
+                            if (lblMoving.Left < 500 && lblMoving.Left < 520)
+                                lblMoving.Left += 10;
+                            else
+                            {
+                                iStateController = 0;
+                                lblAccu.Text = lblMoving.Text;
+                                lblMoving.Text = "";
+
+                                timerJump.Stop();
+                                btnSync.Enabled = true;
+                                btnJump.Enabled = true;
+                            }
+
+                        }
+                        else // data are moving (not stable)
+                        {
+                            if (lblMoving.Left < 320 && lblMoving.Left < 350)
+                                lblMoving.Left += 10;
+                            else
+                            {
+                                if (iCurrentState == 4 || iCurrentState == 5) direction = "UP";
+                                else direction = "DOWN";
+                            }
+                        }
+
+                        break;
+                    }
+                case "DOWN":
+                    {
+                        if (iCurrentState == 4 && iStateController == -1)
+                        {
+                            if (lblMoving.Top < lblOR.Top && lblMoving.Top < lblOR.Top + 20)
+                                lblMoving.Top += 10;
+                            else direction = "LEFT";
+                        }
+                        else
+                        {
+                            if (lblMoving.Top < iCurrentTop + 90 && lblMoving.Top < iCurrentTop + 110)
+                                lblMoving.Top += 10;
+                            else direction = "RIGHT";
+                        }
+
+                        break;
+                    }
+                case "UP":
+                    {
+                        if (iCurrentState == 5) // on the way to accumulator
+                        {
+                            iStateController = 1;
+                            if (lblMoving.Top > lblPC.Top && lblMoving.Top > lblPC.Top - 20)
+                                lblMoving.Top -= 10;
+                            else direction = "LEFT";
+                        }
+                        else if (iCurrentState == 6) // on the way to accumulator
+                        {
+                            if (lblMoving.Top > lblPC.Top && lblMoving.Top > lblPC.Top - 20)
+                                lblMoving.Top -= 10;
+                            else direction = "LEFT";
+                        }
+                        else
+                        {
+                            if (lblMoving.Top > lblIM.Top && lblMoving.Top > lblIM.Top - 20)
+                                lblMoving.Top -= 10;
+                            else direction = "RIGHT";
+                        }
+                        break;
+
+                    }
+                case "RIGHT":
+                    {
+                        if (iCurrentState == 6)
+                        {
+                            if (lblMoving.Left > iCurrentLeft - 190 && lblMoving.Left > iCurrentLeft - 210)
+                                lblMoving.Left -= 10;
+                            else direction = "UP";
+                        }
+                        else if (iCurrentState == 4 && iStateController == -1) // OUT
+                        {
+                            if (lblMoving.Left > iCurrentLeft - 190 && lblMoving.Left > iCurrentLeft - 210)
+                                lblMoving.Left -= 10;
+                            else direction = "DOWN";
+                        }
+                        else if (lblMoving.Left > iCurrentLeft + 40 && lblMoving.Left > iCurrentLeft)
+                            lblMoving.Left -= 10;
+                        else
+                        {
+                            switch (iCurrentState)
+                            {
+                                case 1: //state 1
+                                    {
+                                        lblIM.Text = lblMoving.Text;
+                                        lblMoving.Text = "";
+                                        lblRam.Text = machineCode[iIncrement, 1];
+
+                                        timerJump.Stop();
+                                        btnSync.Enabled = true;
+                                        btnJump.Enabled = true;
+                                        break;
+                                    }
+                                case 3: //state 3
+                                    {
+                                        if (iStateController == 0)
+                                        {
+                                            lblIR.Text = lblMoving.Text;
+                                            lblMoving.Text = lblMoving.Text.Substring(0, 4);
+
+                                            direction = "DOWN";
+                                            iCurrentTop = lblIR.Top;
+
+                                            iStateController = 1; // go to Control Sequencer
+                                        }
+                                        else if (iStateController == 1)
+                                        {
+                                            lblCS.Text = lblMoving.Text;
+                                            lblMoving.Text = "";
+                                            iStateController = 0;
+
+                                            if (lblCS.Text == "1110")
+                                            {
+                                                iStateController = -1; // OUT
+                                            }
+                                            else if (lblCS.Text == "1111")
+                                            {
+                                                iStateController = -2; // HALTED
+                                            }
+                                            timerJump.Stop();
+                                            btnSync.Enabled = true;
+                                            btnJump.Enabled = true;
+                                        }
+                                        break;
+                                    }
+                                case 4: //state 4
+                                    {
+                                        lblIM.Text = lblMoving.Text;
+                                        lblMoving.Text = "";
+                                        lblRam.Text = searchAddress();
+
+                                        timerJump.Stop();
+                                        btnSync.Enabled = true;
+                                        btnJump.Enabled = true;
+                                        break;
+                                    }
+                            }// switch for states
+                        }
+                        break;
+                    }
+
+                default:
+                    break;
+            }
+        }
+
+        /* 
+         * 
+         * End of Jump Part
+         *  
+         */
 
         private void setLblMoving(int reference)
         {
@@ -360,8 +713,8 @@ namespace kuliSAP1
                         lblMoving.Text = machineCode[iIncrement, 0];
                         lblMoving.Top = lblPC.Top;
                         lblMoving.Left = lblPC.Left;
-                        currentTop = lblMoving.Top;
-                        currentLeft = lblMoving.Left;
+                        iCurrentTop = lblMoving.Top;
+                        iCurrentLeft = lblMoving.Left;
                         lblPC.Text = "";
                         break;
                     }
@@ -369,8 +722,8 @@ namespace kuliSAP1
                     {
                         lblMoving.Top = lblRam.Top;
                         lblMoving.Left = lblRam.Left;
-                        currentTop = lblMoving.Top;
-                        currentLeft = lblMoving.Left;
+                        iCurrentTop = lblMoving.Top;
+                        iCurrentLeft = lblMoving.Left;
                         lblMoving.Text = lblRam.Text;
                         lblRam.Text = "";
                         break;
@@ -379,8 +732,8 @@ namespace kuliSAP1
                     {
                         lblMoving.Top = lblIR.Top;
                         lblMoving.Text = lblIR.Text.Substring(4, 4);
-                        currentTop = lblMoving.Top;
-                        currentLeft = lblMoving.Left;
+                        iCurrentTop = lblMoving.Top;
+                        iCurrentLeft = lblMoving.Left;
                         break;
                     }
                 case 4: //Ram (state 5)
@@ -388,8 +741,8 @@ namespace kuliSAP1
                         lblMoving.Top = lblRam.Top;
                         lblMoving.Left = lblRam.Left;
                         lblMoving.Text = lblRam.Text;
-                        currentTop = lblMoving.Top;
-                        currentLeft = lblMoving.Left;
+                        iCurrentTop = lblMoving.Top;
+                        iCurrentLeft = lblMoving.Left;
                         lblRam.Text = "";
                         break;
                     }
@@ -398,8 +751,8 @@ namespace kuliSAP1
                         lblMoving.Top = lblAddSub.Top;
                         lblMoving.Left = lblAddSub.Left;
                         lblMoving.Text = lblAddSub.Text;
-                        currentTop = lblMoving.Top;
-                        currentLeft = lblMoving.Left;
+                        iCurrentTop = lblMoving.Top;
+                        iCurrentLeft = lblMoving.Left;
                         lblAddSub.Text = "";
                         break;
                     }
@@ -408,14 +761,34 @@ namespace kuliSAP1
                         lblMoving.Top = lblAccu.Top;
                         lblMoving.Left = lblAccu.Left;
                         lblMoving.Text = lblAccu.Text;
-                        currentTop = lblMoving.Top;
-                        currentLeft = lblMoving.Left;
+                        iCurrentTop = lblMoving.Top;
+                        iCurrentLeft = lblMoving.Left;
                         lblAccu.Text = "";
                         break;
                     }
             }
+        }//SetlblMoving 
+
+        private string searchAddress()
+        {
+            for (int i = 0; i < 16; i++)
+            {
+                if (machineCode[i, 0].Substring(0, 4) == lblIM.Text) return machineCode[i, 1];
+            }
+            return "";
         }
 
-        
+        private void Reset()
+        {
+            lblPC.Text = lblAccu.Text = lblAddSub.Text = lblBO.Text = lblCS.Text = lblIM.Text = lblIR.Text = lblMoving.Text = lblOR.Text = lblRam.Text = lblReg.Text = "";
+            lblMoving.Left = lblPC.Left;
+            lblMoving.Top = lblPC.Top;
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            Reset();
+            iJumpStateController = -1;
+        }
     }
 }
