@@ -56,11 +56,11 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
             this.panel20 = new System.Windows.Forms.Panel();
             this.panel3.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -104,7 +104,7 @@
             // 
             // panel8
             // 
-            this.panel8.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.panel8.BackColor = System.Drawing.SystemColors.Window;
             this.panel8.Controls.Add(this.label4);
             this.panel8.Controls.Add(this.panel9);
             this.panel8.Location = new System.Drawing.Point(155, 186);
@@ -132,7 +132,7 @@
             // 
             // panel18
             // 
-            this.panel18.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.panel18.BackColor = System.Drawing.SystemColors.Window;
             this.panel18.Controls.Add(this.label11);
             this.panel18.Controls.Add(this.panel19);
             this.panel18.Location = new System.Drawing.Point(297, 340);
@@ -160,7 +160,7 @@
             // 
             // panel16
             // 
-            this.panel16.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.panel16.BackColor = System.Drawing.SystemColors.Window;
             this.panel16.Controls.Add(this.label10);
             this.panel16.Controls.Add(this.panel17);
             this.panel16.Location = new System.Drawing.Point(155, 340);
@@ -188,7 +188,7 @@
             // 
             // panel14
             // 
-            this.panel14.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.panel14.BackColor = System.Drawing.SystemColors.Window;
             this.panel14.Controls.Add(this.label9);
             this.panel14.Controls.Add(this.panel15);
             this.panel14.Location = new System.Drawing.Point(13, 340);
@@ -216,7 +216,7 @@
             // 
             // panel12
             // 
-            this.panel12.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.panel12.BackColor = System.Drawing.SystemColors.Window;
             this.panel12.Controls.Add(this.label8);
             this.panel12.Controls.Add(this.panel13);
             this.panel12.Location = new System.Drawing.Point(297, 187);
@@ -244,7 +244,7 @@
             // 
             // panel10
             // 
-            this.panel10.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.panel10.BackColor = System.Drawing.SystemColors.Window;
             this.panel10.Controls.Add(this.label5);
             this.panel10.Controls.Add(this.panel11);
             this.panel10.Location = new System.Drawing.Point(13, 187);
@@ -272,7 +272,7 @@
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.panel2.BackColor = System.Drawing.SystemColors.Window;
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.panel5);
             this.panel2.Location = new System.Drawing.Point(219, 33);
@@ -301,7 +301,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.label3.BackColor = System.Drawing.SystemColors.Window;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(174, 10);
             this.label3.Name = "label3";
@@ -311,7 +311,7 @@
             // 
             // panel4
             // 
-            this.panel4.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.panel4.BackColor = System.Drawing.SystemColors.Window;
             this.panel4.Controls.Add(this.label1);
             this.panel4.Controls.Add(this.panel1);
             this.panel4.Location = new System.Drawing.Point(77, 34);
@@ -340,6 +340,28 @@
             this.panel6.Size = new System.Drawing.Size(278, 232);
             this.panel6.TabIndex = 3;
             this.panel6.Paint += new System.Windows.Forms.PaintEventHandler(this.panel6_Paint);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.SystemColors.Window;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(19, 207);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(100, 20);
+            this.label13.TabIndex = 14;
+            this.label13.Text = "BSCS 3-1N";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.SystemColors.Window;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(19, 187);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(205, 20);
+            this.label12.TabIndex = 13;
+            this.label12.Text = "Modeling and Simulation";
             // 
             // label6
             // 
@@ -372,28 +394,6 @@
             this.label7.Size = new System.Drawing.Size(48, 13);
             this.label7.TabIndex = 0;
             this.label7.Text = "V.1.0.0";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(19, 187);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(205, 20);
-            this.label12.TabIndex = 13;
-            this.label12.Text = "Modeling and Simulation";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(19, 207);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(100, 20);
-            this.label13.TabIndex = 14;
-            this.label13.Text = "BSCS 3-1N";
             // 
             // panel20
             // 

@@ -81,13 +81,6 @@ namespace kuliSAP1
             }
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-            using (var brush = new LinearGradientBrush(this.ClientRectangle,
-               Color.White, Color.DeepSkyBlue, LinearGradientMode.ForwardDiagonal))
-            {
-                e.Graphics.FillRectangle(brush, this.ClientRectangle);
-            }
-        }
+       
     }
 }

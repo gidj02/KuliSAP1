@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using System.Drawing.Drawing2D;
 
 
 namespace kuliSAP1
@@ -667,6 +668,25 @@ namespace kuliSAP1
 
         private void MainForm_Paint(object sender, PaintEventArgs e)
         {
+
+        }
+
+        private void tabPage1_Paint(object sender, PaintEventArgs e)
+        {
+            using (var brush = new LinearGradientBrush(this.ClientRectangle,
+            Color.White, Color.SkyBlue, LinearGradientMode.ForwardDiagonal))
+            {
+                e.Graphics.FillRectangle(brush, this.ClientRectangle);
+            }
+        }
+
+        private void menuStrip1_Paint(object sender, PaintEventArgs e)
+        {
+            using (var brush = new LinearGradientBrush(this.ClientRectangle,
+            Color.White, Color.SkyBlue, LinearGradientMode.ForwardDiagonal))
+            {
+                e.Graphics.FillRectangle(brush, this.ClientRectangle);
+            }
 
         }
 
