@@ -97,7 +97,7 @@ namespace kuliSAP1
                 richTextBox1.Text = File.ReadAllText(openFileDialog1.FileName);
                 //tabPage1.Text = openFileDialog1.FileName;
                 tabPage1.Text = openFileDialog1.SafeFileName;
-                this.Text = openFileDialog1.FileName + " - AlisapSAP-1";
+                this.Text = openFileDialog1.FileName + " - kuliSAP1";
                 currentFileDirectory = openFileDialog1.FileName;
                 currentFileName = openFileDialog1.SafeFileName;
                 isCurrentFile = true;
@@ -142,7 +142,7 @@ namespace kuliSAP1
         {
             
             tabPage1.Text = Path.GetFileName(saveFileDialog1.FileName);
-            this.Text = Path.GetDirectoryName(saveFileDialog1.FileName) + "\\" + Path.GetFileName(saveFileDialog1.FileName) + " - AlisapSAP-1";
+            this.Text = Path.GetDirectoryName(saveFileDialog1.FileName) + "\\" + Path.GetFileName(saveFileDialog1.FileName) + " - kuliSAP1";
             currentFileDirectory = Path.GetDirectoryName(saveFileDialog1.FileName) + "\\" + Path.GetFileName(saveFileDialog1.FileName);
             currentFileName = Path.GetFileName(saveFileDialog1.FileName);
             isCurrentFile = true;
@@ -190,7 +190,7 @@ namespace kuliSAP1
                         currentFileDirectory = "";
                         currentFileName = "";
                         richTextBox1.Text = "";
-                        this.Text = "AlisapSAP-1";
+                        this.Text = "kuliSAP1";
 
                     }
                     else { cancelled = true; }
@@ -203,7 +203,7 @@ namespace kuliSAP1
                     currentFileDirectory = "";
                     currentFileName = "";
                     richTextBox1.Text = "";
-                    this.Text = "AlisapSAP-1";
+                    this.Text = "kuliSAP1";
                 }
      
             }
@@ -657,6 +657,12 @@ namespace kuliSAP1
         {
             Glossary glossary = new Glossary();
             glossary.ShowDialog();
+        }
+
+        private void aboutSAP1ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            About about = new About();
+            about.ShowDialog();
         }
 
        

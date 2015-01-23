@@ -30,6 +30,8 @@
         {
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox1
@@ -38,31 +40,37 @@
             "Accumulator",
             "Adder",
             "Subtractor",
-            "Address State (T1)",
+            "Address State(T1)",
             "ADD",
+            "Assembly Code",
+            "Assembler",
+            "Assembly Source File",
             "B Register",
-            "Binary Display",
-            "Controller",
-            "Sequencer",
+            "Bin File",
+            "Controller/Sequencer",
             "Control Unit",
+            "Emulator",
             "Execution Cycle(T4-T6)",
             "Fetch cycle",
             "HLT",
             "Increment State (T2)",
             "Instruction Register",
+            "Jump Mode",
             "LDA",
             "Lower Nibble",
             "Memory Address Register (MAR)",
             "Memory State (T3)",
+            "ORG",
             "OUT",
             "Output Register",
             "Program Counter",
-            "Random Access Memory",
+            "RAM",
             "Upper Nibble",
-            "SUB"});
+            "SUB",
+            "Synchronous Mode"});
             this.textBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.textBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.textBox1.Location = new System.Drawing.Point(32, 35);
+            this.textBox1.Location = new System.Drawing.Point(32, 27);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(223, 20);
             this.textBox1.TabIndex = 0;
@@ -72,25 +80,41 @@
             // 
             this.richTextBox1.AutoWordSelection = true;
             this.richTextBox1.BackColor = System.Drawing.SystemColors.Window;
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox1.EnableAutoDragDrop = true;
-            this.richTextBox1.Location = new System.Drawing.Point(32, 73);
+            this.richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox1.Location = new System.Drawing.Point(10, 10);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(297, 205);
+            this.richTextBox1.Size = new System.Drawing.Size(280, 194);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.richTextBox1);
+            this.panel1.Location = new System.Drawing.Point(32, 67);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(10);
+            this.panel1.Size = new System.Drawing.Size(304, 218);
+            this.panel1.TabIndex = 2;
             // 
             // Glossary
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(360, 310);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.textBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Glossary";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Glossary";
             this.Load += new System.EventHandler(this.Glossary_Load);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -100,5 +124,6 @@
 
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Panel panel1;
     }
 }

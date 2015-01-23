@@ -201,6 +201,7 @@
             this.aboutSAP1ToolStripMenuItem.Name = "aboutSAP1ToolStripMenuItem";
             this.aboutSAP1ToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.aboutSAP1ToolStripMenuItem.Text = "About kuliSAP";
+            this.aboutSAP1ToolStripMenuItem.Click += new System.EventHandler(this.aboutSAP1ToolStripMenuItem_Click);
             // 
             // openFileDialog1
             // 
