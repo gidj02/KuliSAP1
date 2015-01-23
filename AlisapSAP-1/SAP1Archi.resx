@@ -117,22 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="label1.Text" xml:space="preserve">
-    <value>    The SAP1 architecture is 8 bits and 
-comprises of 16x8 memory, that is memory 
-location with 8 bits in each location,
-therefore, need 4 address lines which 
-either comes from the Program Counter 
-during computer run phase or comes from 
-the four address switches during the 
-program phase. SAP can only perform 
-addition and subtraction and no logical 
-operation.SAP1 has a W-Bus, a single 8 
-bit bus for address and data transfer. 
-SAP1 explains how a microprocessor works, 
-how instructions are being process and 
-executed and how it interacts with memory 
-and input and output.
-</value>
+  <data name="richTextBox1.Text" xml:space="preserve">
+    <value>The SAP1 architecture is 8 bits and  comprises of 16x8 memory, that is memory location with 8 bits in each location, therefore, need 4 address lines which  either comes from the Program Counter  during computer run phase or comes from  the four address switches during the  program phase. SAP can only perform  addition and subtraction and no logical  operation.SAP1 has a W-Bus, a single 8  bit bus for address and data transfer. SAP1 explains how a microprocessor works, how instructions are being process and  executed and how it interacts with memory and input and output.</value>
   </data>
 </root>
