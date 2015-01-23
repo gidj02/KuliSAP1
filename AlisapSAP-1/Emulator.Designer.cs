@@ -50,6 +50,7 @@
             this.timerJump = new System.Windows.Forms.Timer(this.components);
             this.btnReset = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.timerDelay = new System.Windows.Forms.Timer(this.components);
             this.panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -304,12 +305,16 @@
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
             // 
+            // timerDelay
+            // 
+            this.timerDelay.Interval = 1;
+            this.timerDelay.Tick += new System.EventHandler(this.timerDelay_Tick);
+            // 
             // Emulator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightCyan;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1031, 658);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnReset);
@@ -318,7 +323,6 @@
             this.Controls.Add(this.lblAssembly);
             this.Controls.Add(this.panel);
             this.DoubleBuffered = true;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Emulator";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Emulator";
@@ -351,5 +355,6 @@
         private System.Windows.Forms.Timer timerJump;
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Timer timerDelay;
     }
 }

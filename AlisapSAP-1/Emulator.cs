@@ -16,6 +16,7 @@ namespace kuliSAP1
                     iCurrentLeft = 0,
                     iCurrentState = 0,
                     iStateController = 0,
+                    iDelayController = 0,
                     iJumpStateController = -1;
         private string[,] machineCode;
         private string direction = "";
@@ -88,7 +89,9 @@ namespace kuliSAP1
         {
             iCurrentState = 2;
             lblPC.Text = machineCode[iIncrement + 1, 0];
-            SyncState3();
+            iDelayController = 2;
+            lblState.Text = "State 3";
+            timerDelay.Start();
         }
 
         private void SyncState3()
@@ -143,7 +146,9 @@ namespace kuliSAP1
         {
             if (iIncrement == 0)
             {
-                SyncState1();
+                lblState.Text = "State 1";
+                iDelayController = 0;
+                timerDelay.Start();
             }
             else if (lblAddSub.Text != "")
             {
@@ -174,8 +179,11 @@ namespace kuliSAP1
                                 lblAccu.Text = lblMoving.Text;
                                 lblMoving.Text = "";
 
+                                lblState.Text = "State 6";
                                 timerSynchronous.Stop();
-                                SyncState6();
+
+                                iDelayController = 5;
+                                timerDelay.Start();
                             } 
                         }
                         else if (iCurrentState == 5 && iStateController == 2) // data going to register
@@ -192,8 +200,11 @@ namespace kuliSAP1
 
                                 iStateController = 0;
 
+                                lblState.Text = "State 6";
                                 timerSynchronous.Stop();
-                                SyncState6();
+
+                                iDelayController = 5;
+                                timerDelay.Start();
                             }
                         }
                         else if (iCurrentState == 4 && iStateController == -1) // out
@@ -211,7 +222,11 @@ namespace kuliSAP1
                                 timerSynchronous.Stop();
 
                                 iIncrement++;
-                                SyncState1();// OUT straight to state 1
+
+                                iDelayController = 0;
+                                lblState.Text = "State 1";
+                                timerDelay.Start();
+                                // OUT straight to state 1
                             }
                         }
                         else if (iCurrentState == 6) // data going to accumulator
@@ -223,9 +238,10 @@ namespace kuliSAP1
                                 iStateController = 0;
                                 lblAccu.Text = lblMoving.Text;
                                 lblMoving.Text = "";
-
+                                lblState.Text = "State 1";
                                 timerSynchronous.Stop();
-                                SyncState1();
+                                iDelayController = 0;
+                                timerDelay.Start();
                             } 
                             
                         }
@@ -309,8 +325,11 @@ namespace kuliSAP1
                                         lblMoving.Text = "";
                                         lblRam.Text = machineCode[iIncrement, 1];
 
+                                        lblState.Text = "State 2";
                                         timerSynchronous.Stop();
-                                        SyncState2();
+
+                                        iDelayController = 1;
+                                        timerDelay.Start();
                                         break;
                                     }
                                 case 3: //state 3
@@ -339,8 +358,12 @@ namespace kuliSAP1
                                             {
                                                 iStateController = -2; // HALTED
                                             }
+
+                                            lblState.Text = "State 4";
                                             timerSynchronous.Stop();
-                                            SyncState4();
+
+                                            iDelayController = 3;
+                                            timerDelay.Start();
                                         }
                                         break;
                                     }
@@ -350,8 +373,11 @@ namespace kuliSAP1
                                         lblMoving.Text = "";
                                         lblRam.Text = searchAddress();
 
+                                        lblState.Text = "State 5";
                                         timerSynchronous.Stop();
-                                        SyncState5();
+
+                                        iDelayController = 4;
+                                        timerDelay.Start();
                                         break;
                                     }
                             }// switch for states
@@ -795,9 +821,39 @@ namespace kuliSAP1
 
             Reset();
 
+            iDelayController = 0;
             iIncrement = 0;
             iStateController = 0;
             iJumpStateController = -1;
+        }
+
+        private void timerDelay_Tick(object sender, EventArgs e)
+        {
+            timerDelay.Stop();
+            System.Threading.Thread.Sleep(1000);
+            switch (iDelayController)
+            {
+                case 0:
+                        SyncState1();
+                        break;
+                case 1:
+                        SyncState2();
+                        break;
+                case 2:
+                        SyncState3();
+                        break;
+                case 3:
+                        SyncState4();
+                        break;
+                case 4:
+                        SyncState5();
+                        break;
+                case 5:
+                        SyncState6();
+                        break;
+                default: break;
+            }
+            
         }
     }
 }
