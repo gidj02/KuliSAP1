@@ -49,7 +49,9 @@
             this.timerSynchronous = new System.Windows.Forms.Timer(this.components);
             this.timerJump = new System.Windows.Forms.Timer(this.components);
             this.btnReset = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel
@@ -233,12 +235,12 @@
             // 
             // lblAssembly
             // 
-            this.lblAssembly.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lblAssembly.BackColor = System.Drawing.Color.Transparent;
             this.lblAssembly.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblAssembly.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAssembly.Location = new System.Drawing.Point(12, 9);
             this.lblAssembly.Name = "lblAssembly";
-            this.lblAssembly.Size = new System.Drawing.Size(330, 319);
+            this.lblAssembly.Size = new System.Drawing.Size(330, 246);
             this.lblAssembly.TabIndex = 1;
             this.lblAssembly.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -247,7 +249,7 @@
             this.btnJump.BackColor = System.Drawing.Color.DodgerBlue;
             this.btnJump.Font = new System.Drawing.Font("Corbel", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnJump.ForeColor = System.Drawing.Color.Black;
-            this.btnJump.Location = new System.Drawing.Point(84, 396);
+            this.btnJump.Location = new System.Drawing.Point(88, 311);
             this.btnJump.Name = "btnJump";
             this.btnJump.Size = new System.Drawing.Size(184, 47);
             this.btnJump.TabIndex = 2;
@@ -260,7 +262,7 @@
             this.btnSync.BackColor = System.Drawing.Color.DodgerBlue;
             this.btnSync.Font = new System.Drawing.Font("Corbel", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSync.ForeColor = System.Drawing.Color.Black;
-            this.btnSync.Location = new System.Drawing.Point(84, 343);
+            this.btnSync.Location = new System.Drawing.Point(88, 258);
             this.btnSync.Name = "btnSync";
             this.btnSync.Size = new System.Drawing.Size(184, 47);
             this.btnSync.TabIndex = 3;
@@ -283,7 +285,7 @@
             this.btnReset.BackColor = System.Drawing.Color.DodgerBlue;
             this.btnReset.Font = new System.Drawing.Font("Corbel", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReset.ForeColor = System.Drawing.Color.Black;
-            this.btnReset.Location = new System.Drawing.Point(84, 449);
+            this.btnReset.Location = new System.Drawing.Point(88, 364);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(184, 47);
             this.btnReset.TabIndex = 4;
@@ -291,11 +293,25 @@
             this.btnReset.UseVisualStyleBackColor = false;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
+            this.pictureBox1.Location = new System.Drawing.Point(68, 418);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(229, 228);
+            this.pictureBox1.TabIndex = 5;
+            this.pictureBox1.TabStop = false;
+            // 
             // Emulator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.LightCyan;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1031, 658);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnJump);
             this.Controls.Add(this.btnSync);
@@ -308,6 +324,7 @@
             this.Text = "Emulator";
             this.panel.ResumeLayout(false);
             this.panel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -333,5 +350,6 @@
         private System.Windows.Forms.Label lblState;
         private System.Windows.Forms.Timer timerJump;
         private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
