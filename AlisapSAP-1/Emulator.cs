@@ -17,6 +17,7 @@ namespace kuliSAP1
                     iCurrentState = 0,
                     iStateController = 0,
                     iDelayController = 0,
+                    iIsNegative = 0,
                     iJumpStateController = -1;
         private string[,] machineCode;
         private string direction = "";
@@ -136,7 +137,7 @@ namespace kuliSAP1
             setLblMoving(4);
 
             iStateController = machineCode[iIncrement, 0] == "0001" || machineCode[iIncrement, 0] == "0010" ? 2 : 0;
-            
+           
             iCurrentState = 5;   
             direction = "LEFT";
 
@@ -198,16 +199,34 @@ namespace kuliSAP1
                                 lblReg.Text = lblMoving.Text;
                                 lblMoving.Text = "";
 
-                                if (machineCode[iIncrement, 0] == "0001")
+                                if (lblCS.Text == "0001")
                                 {
+                                    iIsNegative = 0;
                                     value = Convert.ToInt32(lblAccu.Text, 2) + Convert.ToInt32(lblReg.Text, 2);
+                                    lblAddSub.Text = Convert.ToString(value, 2).PadLeft(8, '0');
                                 }
-                                else if (machineCode[iIncrement, 0] == "0010")
+                                else if (lblCS.Text == "0010")
                                 {
+                                    iIsNegative = 1;
                                     value = Convert.ToInt32(lblAccu.Text, 2) - Convert.ToInt32(lblReg.Text, 2);
+                                    lbltempnegative.Text = Convert.ToString(value, 2);
+
+                                    string sTempVal = Convert.ToString(Math.Abs(value), 2).PadLeft(8, '0');
+
+                                    if (value < 0)
+                                    {
+                                        string sTemp = sTempVal.Substring(sTempVal.LastIndexOf('1'), sTempVal.Length - sTempVal.LastIndexOf('1'));
+                                        int iTemp = sTempVal.LastIndexOf('1');
+
+                                        sTempVal = sTempVal.Substring(0, iTemp).Replace('0', '*');
+                                        sTempVal = sTempVal.Substring(0, iTemp).Replace('1', '0');
+                                        sTempVal = sTempVal.Substring(0, iTemp).Replace('*', '1') + sTemp;
+                                    }
+
+                                    lblAddSub.Text = sTempVal; 
                                 }
                                 
-                                lblAddSub.Text = Convert.ToString(value, 2);
+                                
 
                                 iStateController = 0;
 
@@ -229,7 +248,8 @@ namespace kuliSAP1
 
                                 iStateController = 0;
 
-                                lblBO.Text = Convert.ToInt32(lblOR.Text, 2).ToString();
+                                if (iIsNegative == 1) lblBO.Text = Convert.ToInt32(lbltempnegative.Text, 2).ToString();
+                                else lblBO.Text = Convert.ToInt32(lblOR.Text, 2).ToString();
                                 timerSynchronous.Stop();
 
                                 iIncrement++;
@@ -552,16 +572,33 @@ namespace kuliSAP1
                                 lblReg.Text = lblMoving.Text;
                                 lblMoving.Text = "";
 
-                                if (machineCode[iIncrement, 0] == "0001")
+                                if (lblCS.Text == "0001")
                                 {
+                                    iIsNegative = 0;
                                     value = Convert.ToInt32(lblAccu.Text, 2) + Convert.ToInt32(lblReg.Text, 2);
+                                    lblAddSub.Text = Convert.ToString(value, 2).PadLeft(8, '0');
                                 }
-                                else if (machineCode[iIncrement, 0] == "0010")
+                                else if (lblCS.Text == "0010")
                                 {
+                                    iIsNegative = 1;
                                     value = Convert.ToInt32(lblAccu.Text, 2) - Convert.ToInt32(lblReg.Text, 2);
+                                    lbltempnegative.Text = Convert.ToString(value, 2);
+
+                                    string sTempVal = Convert.ToString(Math.Abs(value), 2).PadLeft(8, '0');
+
+                                    if (value < 0)
+                                    {
+                                        string sTemp = sTempVal.Substring(sTempVal.LastIndexOf('1'), sTempVal.Length - sTempVal.LastIndexOf('1'));
+                                        int iTemp = sTempVal.LastIndexOf('1');
+
+                                        sTempVal = sTempVal.Substring(0, iTemp).Replace('0', '*');
+                                        sTempVal = sTempVal.Substring(0, iTemp).Replace('1', '0');
+                                        sTempVal = sTempVal.Substring(0, iTemp).Replace('*', '1') + sTemp;
+                                    }
+
+                                    lblAddSub.Text = sTempVal;
                                 }
 
-                                lblAddSub.Text = Convert.ToString(value, 2);
 
                                 iStateController = 0;
 
@@ -581,7 +618,8 @@ namespace kuliSAP1
 
                                 iStateController = 0;
 
-                                lblBO.Text = Convert.ToInt32(lblOR.Text, 2).ToString();
+                                if (iIsNegative == 1) lblBO.Text = Convert.ToInt32(lbltempnegative.Text, 2).ToString();
+                                else lblBO.Text = Convert.ToInt32(lblOR.Text, 2).ToString();
                                 timerJump.Stop();
 
                                 btnSync.Enabled = true;
@@ -827,7 +865,7 @@ namespace kuliSAP1
 
         private void Reset()
         {
-            lblPC.Text = lblAccu.Text = lblAddSub.Text = lblBO.Text = lblCS.Text = lblIM.Text = lblIR.Text = lblMoving.Text = lblOR.Text = lblRam.Text = lblReg.Text = "";
+            lbltempnegative.Text = lblPC.Text = lblAccu.Text = lblAddSub.Text = lblBO.Text = lblCS.Text = lblIM.Text = lblIR.Text = lblMoving.Text = lblOR.Text = lblRam.Text = lblReg.Text = "";
             lblMoving.Left = lblPC.Left;
             lblMoving.Top = lblPC.Top;
         }
@@ -845,6 +883,7 @@ namespace kuliSAP1
             iDelayController = 0;
             iIncrement = 0;
             iStateController = 0;
+            iIsNegative = 0;
             iJumpStateController = -1;
         }
 

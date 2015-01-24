@@ -51,6 +51,7 @@
             this.btnReset = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timerDelay = new System.Windows.Forms.Timer(this.components);
+            this.lbltempnegative = new System.Windows.Forms.Label();
             this.panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -60,6 +61,7 @@
             this.panel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel.BackgroundImage")));
             this.panel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel.Controls.Add(this.lbltempnegative);
             this.panel.Controls.Add(this.lblState);
             this.panel.Controls.Add(this.lblBO);
             this.panel.Controls.Add(this.lblOR);
@@ -310,6 +312,15 @@
             this.timerDelay.Interval = 1;
             this.timerDelay.Tick += new System.EventHandler(this.timerDelay_Tick);
             // 
+            // lbltempnegative
+            // 
+            this.lbltempnegative.AutoSize = true;
+            this.lbltempnegative.Location = new System.Drawing.Point(20, 339);
+            this.lbltempnegative.Name = "lbltempnegative";
+            this.lbltempnegative.Size = new System.Drawing.Size(0, 13);
+            this.lbltempnegative.TabIndex = 6;
+            this.lbltempnegative.Visible = false;
+            // 
             // Emulator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -357,5 +368,6 @@
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Timer timerDelay;
+        private System.Windows.Forms.Label lbltempnegative;
     }
 }
